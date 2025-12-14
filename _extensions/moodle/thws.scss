@@ -1,0 +1,128 @@
+/*-- scss:defaults --*/
+
+// 1. THWS Farbpalette
+$thws-orange: #ff6a00;
+$thws-grey: #333333;
+$light-grey: #f8f9fa;
+
+// 2. Basis-Variablen überschreiben (Bootstrap)
+$primary: $thws-orange;
+$body-color: $thws-grey;
+$body-bg: #ffffff;
+$font-family-sans-serif: "Roboto", "Helvetica Neue", Arial, sans-serif;
+$headings-font-weight: 700;
+$link-color: $thws-orange;
+$link-decoration: none;
+
+/*-- scss:rules --*/
+
+// 3. Typografie-Feinschliff
+h1,
+h2,
+h3 {
+    color: $thws-grey;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+h1 {
+    border-bottom: 3px solid $thws-orange; // Der THWS-Strich unter dem Titel
+    padding-bottom: 0.3em;
+    font-size: 2.5rem;
+}
+
+// 4. Zitat-Boxen (Ihre philosophischen Einschübe)
+blockquote {
+    border-left: 5px solid $thws-orange;
+    padding-left: 1rem;
+    margin-left: 0;
+    color: #555;
+    font-style: italic;
+    background-color: $light-grey; // Leichtes Grau für Kontrast
+    padding: 10px;
+    border-radius: 0 5px 5px 0;
+}
+
+// 5. Inhaltsverzeichnis (TOC) Styling
+#TOC {
+    border-left: 1px solid #ddd;
+}
+
+#TOC>ul>li>a.active {
+    color: $thws-orange;
+    border-left: 2px solid $thws-orange;
+    padding-left: 10px;
+}
+
+// 6. Logo-Positionierung (Feinjustierung für Header)
+.navbar-brand img {
+    max-height: 50px; // Logo nicht zu wuchtig
+    margin-right: 1rem;
+}
+
+// 7. Callout Blocks (für "Advocatus Diaboli" Warnungen)
+.callout-warning {
+    border-left-color: $thws-orange !important;
+}
+
+// ==========================================
+// 8. Custom Accordion (Details & Summary)
+// ==========================================
+
+details {
+    margin-bottom: 1rem;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+    overflow: hidden; // Damit Ecken rund bleiben
+}
+
+summary {
+    display: block; // Wichtig für Custom Styling
+    position: relative;
+    padding: 15px 15px 15px 50px; // Viel Platz links für das Icon
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.15rem;
+    color: $thws-orange; // Schrift in Orange
+    background-color: rgba($thws-orange, 0.05); // Ganz zarter Hintergrund
+    transition: background-color 0.2s;
+    list-style: none; // Standard-Dreieck ausblenden (Chrome/Safari)
+}
+
+// Standard-Dreieck auch in anderen Browsern ausblenden
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary:hover {
+    background-color: rgba($thws-orange, 0.1);
+}
+
+// Unser eigenes, großes Dreieck
+summary::before {
+    content: "▶"; // Oder ein Icon, falls FontAwesome geladen ist
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: $thws-orange;
+    transition: transform 0.3s ease;
+}
+
+// Drehung bei offenem Zustand
+details[open] summary::before {
+    transform: translateY(-50%) rotate(90deg);
+}
+
+details[open] summary {
+    border-bottom: 1px solid #eee;
+}
+
+// Inhalt eingerückt
+details>*:not(summary) {
+    padding: 20px 20px 20px 50px;
+    color: $thws-grey;
+}

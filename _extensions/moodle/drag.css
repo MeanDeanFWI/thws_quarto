@@ -1,0 +1,249 @@
+/* --- 1. Lückentext (Click-to-Select) --- */
+.drag-exercise {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-left: 5px solid #ff6a00;
+    padding: 25px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin: 30px 0;
+}
+
+.click-text {
+    line-height: 2.4;
+    font-size: 1.1rem;
+}
+
+.click-gap {
+    display: inline-block;
+    min-width: 100px;
+    height: 32px;
+    border-bottom: 2px solid #333;
+    background: #f4f4f4;
+    margin: 0 6px;
+    padding: 0 10px;
+    vertical-align: bottom;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+}
+
+.click-gap:hover {
+    background: #e2e2e2;
+}
+
+.click-gap.filled {
+    background: #fff;
+    border-bottom-color: #ff6a00;
+}
+
+.click-gap.correct {
+    background: #d4edda;
+    border-bottom-color: #28a745;
+    color: #155724;
+}
+
+.click-gap.wrong {
+    background: #f8d7da;
+    border-bottom-color: #dc3545;
+    color: #721c24;
+}
+
+.click-pool {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.pool-word {
+    background: #333;
+    color: #fff;
+    border: 2px solid #333;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pool-word:hover {
+    transform: translateY(-2px);
+}
+
+.pool-word.selected {
+    background: #ff6a00;
+    border-color: #ff6a00;
+    box-shadow: 0 0 8px rgba(255, 106, 0, 0.5);
+}
+
+.pool-word.used {
+    opacity: 0.3;
+    pointer-events: none;
+    background: #999;
+    border-color: #999;
+    transform: none;
+}
+
+.check-btn {
+    margin-top: 20px;
+    background: transparent;
+    color: #ff6a00;
+    border: 2px solid #ff6a00;
+    padding: 8px 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.check-btn:hover {
+    background: #ff6a00;
+    color: white;
+}
+
+/* --- 2. Flip-Cards --- */
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 220px;
+    perspective: 1000px;
+    margin: 30px 0;
+    cursor: pointer;
+}
+
+.flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-front,
+.flip-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    flex-direction: column;
+}
+
+.flip-front {
+    background: #333;
+    color: white;
+    border-bottom: 5px solid #ff6a00;
+}
+
+.flip-front h4 {
+    color: white;
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.flip-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    opacity: 0.3;
+}
+
+.flip-back {
+    background: #f8f9fa;
+    color: #333;
+    transform: rotateY(180deg);
+    border: 1px solid #ddd;
+    overflow-y: auto;
+}
+
+/* --- 3. Quick-Check (Quiz) --- */
+.quick-check {
+    margin: 30px 0;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.qc-question {
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 1.15rem;
+    color: #333;
+}
+
+.qc-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.qc-btn {
+    padding: 15px;
+    border: 2px solid #e9ecef;
+    background: white;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.2s;
+    color: #495057;
+}
+
+.qc-btn:hover:not(:disabled) {
+    border-color: #ff6a00;
+    background: #fff8e1;
+}
+
+.qc-btn.correct {
+    background: #d4edda;
+    color: #155724;
+    border-color: #28a745;
+}
+
+.qc-btn.wrong {
+    background: #f8d7da;
+    color: #721c24;
+    border-color: #dc3545;
+}
+
+.qc-btn.correct-dimmed {
+    border-color: #28a745;
+    color: #28a745;
+    opacity: 0.7;
+}
+
+.qc-feedback {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.qc-feedback.show-correct {
+    background: #d4edda;
+    color: #155724;
+    border-left: 4px solid #28a745;
+}
+
+.qc-feedback.show-wrong {
+    background: #f8d7da;
+    color: #721c24;
+    border-left: 4px solid #dc3545;
+}
