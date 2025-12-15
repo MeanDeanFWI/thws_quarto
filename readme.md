@@ -46,7 +46,7 @@ author:
   - name: Ihr Name
     email: ihr.name@thws.de
     role: Dozent
-    affiliation: THWS Business School
+    affiliation: THWS FWI
 
 # Semester-Daten
 semester: "WS 25/26"
