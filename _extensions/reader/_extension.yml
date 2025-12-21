@@ -8,4 +8,6 @@ contributes:
       template-partials:
         - typst-template.typ
         - typst-show.typ
-
+resources:
+  - logo/logo.svg
+  - logo/logo_en.svg
