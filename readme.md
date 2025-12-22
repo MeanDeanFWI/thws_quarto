@@ -160,7 +160,7 @@ Bettet Videos datenschutzkonform ein.
 Drücken Sie in VS Code oben rechts auf den **Render**-Button (blauer Pfeil) oder nutzen Sie das Terminal:
 
 * **Alles erstellen:** `quarto render 01_vorlesung.qmd`
-* **Nur HTML (schnell):** `quarto render 01_vorlesung.qmd --to html`
-* **Nur PDF:** `quarto render 01_vorlesung.qmd --to thws-reader-typst`
+* **Nur HTML (schnell):** `quarto render 01_vorlesung.qmd --to moodle -html`
+* **Nur PDF:** `quarto render 01_vorlesung.qmd --to reader-typst`
 
 🎉 **Fertig!** Laden Sie die HTML-Datei oder das PDF in Moodle hoch und danken Sie dem Studiendekan.
