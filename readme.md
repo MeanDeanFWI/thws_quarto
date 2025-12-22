@@ -9,18 +9,19 @@ Diese Anleitung erklärt, wie Sie in 5 Minuten eine interaktive Vorlesungseinhei
 ## 🛠️ 1. Vorbereitung (Einmalig)
 
 Stellen Sie sicher, dass folgende Software installiert ist:
-1.  **[VS Code](https://code.visualstudio.com/)** (Editor)
-2.  **[Quarto CLI](https://quarto.org/docs/get-started/)** (Der Generator)
-3.  **VS Code Extension:** Suchen Sie in VS Code nach "Quarto" und installieren Sie die Extension.
+
+1. **[VS Code](https://code.visualstudio.com/)** (Editor)
+2. **[Quarto CLI](https://quarto.org/docs/get-started/)** (Der Generator)
+3. **VS Code Extension:** Suchen Sie in VS Code (links bei den Quadraten) nach "Quarto" und installieren Sie die Extension.
 
 ---
 
 ## 🚀 2. Projekt starten
 
-1.  Erstellen Sie einen neuen, leeren Ordner für Ihre Vorlesung (z.B. `Marketing_01`).
-2.  Öffnen Sie diesen Ordner in VS Code (`Datei` -> `Ordner öffnen...`).
-3.  Öffnen Sie das **Terminal** in VS Code (Menü: `Terminal` -> `New Terminal`).
-4.  Geben Sie folgenden Befehl ein, um die THWS-Vorlagen zu installieren:
+1. Erstellen Sie einen neuen, leeren Ordner für Ihre Vorlesung (z.B. `Marketing_01`).
+2. Öffnen Sie diesen Ordner in VS Code (`Datei` -> `Ordner öffnen...`).
+3. Öffnen Sie das **Terminal** in VS Code (Menü: `Terminal` -> `New Terminal`).
+4. Geben Sie folgenden Befehl ein, um die THWS-Vorlagen zu installieren:
 
 ```bash
 quarto add MeanDeanFWI/thws_quarto
@@ -31,8 +32,12 @@ quarto add MeanDeanFWI/thws_quarto
 
 ---
 
-## 📝 3. Die Datei anlegen (YAML)Erstellen Sie eine neue Datei, z.B. `01_vorlesung.qmd`.
-Kopieren Sie diesen Header **exakt** an den Anfang der Datei:
+## 📝 3. Die Datei anlegen (YAML)
+
+Erstellen Sie eine neue Datei, z.B. `01_vorlesung.qmd`.
+Kopieren Sie diesen Header **exakt** an den Anfang der Datei.
+
+💡 **Tipp:** Löschen Sie die Formate raus, die Sie gerade nicht brauchen (einfach mit `#` auskommentieren).
 
 ```yaml
 ---
@@ -53,19 +58,30 @@ semester: "WS 25/26"
 course: "Modulname"
 version: "1.0"
 
-# für eine Variante entscheiden
+# --- Ausgabe-Formate ---
 format:
-  # 1. Skript (PDF)
- # reader-typst
+  # 1. Skript (PDF) - Das volle Lehrbuch
+  #reader-typst:
+    logo: "images/logo.png"  # Optional: Eigenes Logo (siehe unten)
+
+  # 2. Handout (PDF) - Kompakt für die Vorlesung
+  #handout-typst:
+    logo: "images/logo.png"
+
+  # 3. Moodle (HTML) - Interaktiv für LMS
+  #moodle-html:
     
-  # 2. Handout (PDF)
- # handout-typst
-
-  # 3. Moodle (HTML Interaktiv)
- # moodle-html
 ---
-
 ```
+
+
+## 🖼️ Exkurs: Eigenes Logo einbinden
+
+
+1. Erstellen Sie einen Ordner `images` in Ihrem Projekt.
+2. Legen Sie dort Ihre Bilddatei ab (z.B. `logo.png` oder `logo.svg`).
+3. Fügen Sie im YAML-Header (siehe oben) unter dem jeweiligen Format die Zeile hinzu:
+`logo: "images/logo.png"`
 
 ---
 
@@ -111,12 +127,29 @@ Welches Prinzip gilt im HGB?
 
 ```
 
-### D. Videos (YouTube)
+### D. Fallstudien (Reflection Pattern)
+
+Erst nachdenken, dann Lösung sehen. Das Textfeld erscheint automatisch.
+
+```markdown
+::: {.case-study}
+#### Fall Müller
+Herr Müller hat vergessen, die Rückstellung zu bilden. Wie bewerten Sie das?
+
+::: {.solution}
+**Lösung:**
+Nach § 249 HGB muss für ungewisse Verbindlichkeiten eine Rückstellung gebildet werden.
+:::
+:::
+
+```
+
+### E. Videos (YouTube)
 
 Bettet Videos datenschutzkonform ein.
 
 ```markdown
-{{< video [https://www.youtube.com/watch?v=IHR_VIDEO_ID](https://www.youtube.com/watch?v=IHR_VIDEO_ID) >}}
+{{< video https://www.youtube.com/watch?v=VIDEO_ID >}}
 
 ```
 
@@ -124,8 +157,10 @@ Bettet Videos datenschutzkonform ein.
 
 ## 🖨️ 5. Ergebnis erstellen (Rendern)
 
-Wenn Sie fertig sind:
+Drücken Sie in VS Code oben rechts auf den **Render**-Button (blauer Pfeil) oder nutzen Sie das Terminal:
 
-Gewünschtes Format im YAML angeben und den render Button drücken.
+* **Alles erstellen:** `quarto render 01_vorlesung.qmd`
+* **Nur HTML (schnell):** `quarto render 01_vorlesung.qmd --to html`
+* **Nur PDF:** `quarto render 01_vorlesung.qmd --to thws-reader-typst`
 
-Nachher dem Studiendekan danken.
+🎉 **Fertig!** Laden Sie die HTML-Datei oder das PDF in Moodle hoch und danken Sie dem Studiendekan.
