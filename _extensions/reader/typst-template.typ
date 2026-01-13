@@ -1,9 +1,22 @@
 // ===========================================================
 // THWS-Reader-Template (Unified Interface - FIXED & CLEAN)
 // ===========================================================
+#import "@preview/cades:0.3.1": qr-code
 
 #let thws_orange = rgb("#ff6a00")
-
+#let flashcard(title: "Hinweis", body) = {
+  block(
+    width: 100%,
+    stroke: 0.5pt + rgb("#fa7d19"), // Oder die Farbe der jeweiligen Extension
+    inset: 1em,
+    radius: 3pt,
+    fill: white,
+  )[
+    #text(fill: rgb("#fa7d19"), weight: "bold")[#title]
+    #v(0.5em)
+    #body
+  ]
+}
 #let project(
   title: [Titel],
   subtitle: none,
@@ -23,6 +36,9 @@
   citation_style: none,
   show_outline: true,
   outline_depth: 2,
+  // Custom
+  web_url: none,
+  github_url: none,
   body,
 ) = {
   //----------------------------
@@ -157,6 +173,24 @@
     v(1cm)
     align(center, block(width: 80%)[#text(style: "italic")[#abstract]])
   }
+
+  // ... (nach Titel und Autor auf dem Deckblatt)
+
+  // QR-Logik
+  let qr_target = if web_url != none { web_url } else { github_url }
+
+  if qr_target != none {
+    place(bottom + right, dx: 0.5cm, dy: 0.5cm)[
+      #align(center)[
+        #qr-code(qr_target, width: 2.2cm, color: rgb("#333333"))
+        #v(0.2cm)
+        #text(size: 6pt, font: ("Helvetica", "Arial"), fill: gray.darken(20%))[
+          Interaktive Übungen \ & Online-Version
+        ]
+      ]
+    ]
+  }
+
 
   pagebreak()
 
