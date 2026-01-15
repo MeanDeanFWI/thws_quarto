@@ -168,4 +168,49 @@
   } catch (e) {console.error("Error in Quiz Module:", e); }
 
 });
+
+      // -----------------------------------------------------------
+      // MODUL 4: Reflection Pattern (Case Study)
+      // -----------------------------------------------------------
+      try {
+    const cases = document.querySelectorAll('.case-study');
+
+    cases.forEach((caseBox) => {
+      const solution = caseBox.querySelector('.solution');
+
+      if (solution) {
+        // 1. Textfeld
+        const inputArea = document.createElement('textarea');
+      inputArea.className = 'student-input';
+      // HIER: Sprachvariable t.placeholder
+      inputArea.placeholder = t.placeholder;
+
+      // 2. Button
+      const button = document.createElement('button');
+      button.className = 'reveal-btn';
+      // HIER: Sprachvariable t.reveal
+      button.innerText = t.reveal;
+
+      // 3. Einfügen
+      caseBox.insertBefore(inputArea, solution);
+      caseBox.insertBefore(button, solution);
+
+      // 4. Klick-Logik
+      button.addEventListener('click', function() {
+          if (solution.style.display === 'block') {
+        solution.style.display = 'none';
+      // HIER: Variable t.reveal (wieder zurück)
+      button.innerText = t.reveal;
+          } else {
+        solution.style.display = 'block';
+      // HIER: Variable t.hide
+      button.innerText = t.hide;
+          }
+        });
+      }
+    });
+  } catch (e) {console.error("Error in Reflection Module:", e); }
+
+});
+
 </script>
