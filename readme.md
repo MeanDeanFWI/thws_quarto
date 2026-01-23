@@ -10,11 +10,7 @@ Stellen Sie sicher, dass folgende Software installiert ist:
 
 1. **[VS Code](https://code.visualstudio.com/)** (Editor)
 2. **[Quarto CLI](https://quarto.org/docs/get-started/)** (Der Generator)
-<<<<<<< HEAD
 3. **VS Code Extension:** Suchen Sie in VS Code (links bei den Quadraten) nach "Quarto" und installieren Sie die Extension.
-=======
-3. **VS Code Extension:** Suchen Sie in VS Code nach "Quarto" und installieren Sie die Extension.
->>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa
 
 ---
 
@@ -37,13 +33,9 @@ quarto add c-kraus/thws_quarto
 ## 📝 3. Die Datei anlegen (YAML)
 
 Erstellen Sie eine neue Datei, z.B. `01_vorlesung.qmd`.
-<<<<<<< HEAD
 Kopieren Sie diesen Header **exakt** an den Anfang der Datei.
 
 💡 **Tipp:** Löschen Sie die Formate raus, die Sie gerade nicht brauchen (einfach mit `#` auskommentieren).
-=======
-Kopieren Sie diesen Header **exakt** an den Anfang der Datei:
->>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa
 
 ```yaml
 ---
@@ -67,7 +59,6 @@ semester: "WS 25/26"
 course: "Modulname"
 version: "1.0"
 
-<<<<<<< HEAD
 # --- Ausgabe-Formate ---
 format:
   # 1. Skript (PDF) - Das volle Lehrbuch
@@ -89,7 +80,6 @@ format:
     
   # 2. Moodle (HTML) - Interaktiv
   moodle-html: default
->>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa
 ---
 ```
 
@@ -208,9 +198,6 @@ Nach § 249 HGB muss für ungewisse Verbindlichkeiten eine Rückstellung gebilde
 ```
 
 ### E. Videos (YouTube)
-=======
-### F. Videos (YouTube)
->>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa
 
 Bettet Videos datenschutzkonform ein.
 
@@ -232,7 +219,6 @@ Bettet Videos datenschutzkonform ein.
 
 ## 🔗 5. Hybrid-Publishing (QR-Codes)
 
-<<<<<<< HEAD
 Drücken Sie in VS Code oben rechts auf den **Render**-Button (blauer Pfeil) oder nutzen Sie das Terminal:
 
 * **Alles erstellen:** `quarto render 01_vorlesung.qmd`
@@ -278,4 +264,3 @@ Bestätigen Sie mit a (für "All") oder y.
 Ihre Inhalte (Texte in .qmd-Dateien) bleiben dabei zu 100% sicher.
 
 Nur die Systemdateien im Ordner _extensions werden überschrieben. (Haben Sie dort manuell Dinge geändert, gehen diese verloren – was man ohnehin vermeiden sollte).
->>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa
