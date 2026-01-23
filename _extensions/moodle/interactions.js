@@ -1,6 +1,7 @@
 <script>
   document.addEventListener("DOMContentLoaded", function() {
 
+<<<<<<< HEAD
   // -----------------------------------------------------------
   // 0. Language Detection & Dictionary
   // -----------------------------------------------------------
@@ -26,6 +27,27 @@
     // MODUL 1: Click-to-Select (Gap Text)
     // -----------------------------------------------------------
     try {
+=======
+ // --- 0. KONFIGURATION (Automatische Spracherkennung) ---
+  // Wir lesen das "lang"-Attribut aus dem HTML-Tag (das Quarto setzt)
+  const currentLang = document.documentElement.lang || 'en';
+  const isGerman = currentLang.startsWith('de'); // Erkennt 'de', 'de-DE', 'de-AT'
+
+  const t = isGerman ? {
+    // DEUTSCH
+    placeholder: "Ihre Überlegungen hier notieren...",
+  reveal: "Lösung anzeigen",
+  hide: "Lösung verbergen"
+  } : {
+    // ENGLISCH (Fallback)
+    placeholder: "Write your thoughts here...",
+  reveal: "Show Solution",
+  hide: "Hide Solution"
+  };
+
+  // --- MODUL 1: Click-to-Select (Gap Text) ---
+  try {
+>>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa
     const dragExercises = document.querySelectorAll(".drag-exercise");
     dragExercises.forEach((ex) => {
       const originalHTML = ex.innerHTML;
@@ -45,9 +67,14 @@
         }
       });
 
+<<<<<<< HEAD
         // HIER: Sprachvariable t.check nutzen
         newHtml += `</div><div class="click-pool"></div><button class="check-btn">${t.check}</button>`;
       ex.innerHTML = newHtml;
+=======
+      newHtml += '</div><div class="click-pool"></div><button class="check-btn">Check</button>';
+    ex.innerHTML = newHtml;
+>>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa
 
       let selectedWordBtn = null;
       const pool = ex.querySelector(".click-pool");
@@ -151,8 +178,15 @@
           const explanationBlock = qc.querySelector("blockquote");
           const explanation = explanationBlock ? explanationBlock.innerHTML : "";
 
+<<<<<<< HEAD
           // HIER: Sprachvariable t.testKnowledge als Fallback
           let questionText = t.testKnowledge;
+=======
+        let questionText = "Test your knowledge:";
+        const p = qc.querySelector("p");
+        if (p && p !== explanationBlock) questionText = p.innerHTML;
+        else if (qc.firstChild.nodeType === 3) questionText = qc.firstChild.textContent;
+>>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa
 
           const firstList = qc.querySelector("ul, ol");
           const paragraphs = Array.from(qc.querySelectorAll("p"));
@@ -161,6 +195,7 @@
             (!explanationBlock || !explanationBlock.contains(p))
           );
 
+<<<<<<< HEAD
           if (qp) {
             questionText = qp.innerHTML;
           } else {
@@ -172,6 +207,33 @@
                 collectedText += node.innerText;
               }
               node = node.nextSibling;
+=======
+        listItems.forEach(li => {
+          const isCorrect = li.querySelector("strong") !== null;
+          const text = li.textContent;
+          html += `<button class="qc-btn" data-correct="${isCorrect}">${text}</button>`;
+        });
+
+        html += `</div><div class="qc-feedback" style="display:none;">${explanation}</div>`;
+        qc.innerHTML = html;
+
+        const btns = qc.querySelectorAll(".qc-btn");
+        const feedback = qc.querySelector(".qc-feedback");
+
+        btns.forEach(btn => {
+          btn.addEventListener("click", () => {
+            btns.forEach(b => b.disabled = true);
+
+            if (btn.dataset.correct === "true") {
+              btn.classList.add("correct");
+              feedback.classList.add("show-correct");
+              feedback.innerHTML = "<strong>Correct!</strong> " + feedback.innerHTML;
+            } else {
+              btn.classList.add("wrong");
+              btns.forEach(b => { if (b.dataset.correct === "true") b.classList.add("correct-dimmed"); });
+              feedback.classList.add("show-wrong");
+              feedback.innerHTML = "<strong>Not quite.</strong> " + feedback.innerHTML;
+>>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa
             }
             if (collectedText.trim().length > 0) questionText = collectedText.trim();
           }
@@ -213,15 +275,21 @@
   } catch (e) {console.error("Error in Quiz Module:", e); }
 
 
+<<<<<<< HEAD
       // -----------------------------------------------------------
       // MODUL 4: Reflection Pattern (Case Study)
       // -----------------------------------------------------------
       try {
+=======
+    // --- MODUL 4: Reflection Pattern (Case Study) ---
+    try {
+>>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa
     const cases = document.querySelectorAll('.case-study');
 
     cases.forEach((caseBox) => {
       const solution = caseBox.querySelector('.solution');
 
+<<<<<<< HEAD
       if (solution) {
         // 1. Textfeld
         const inputArea = document.createElement('textarea');
@@ -249,11 +317,42 @@
         solution.style.display = 'block';
       // HIER: Variable t.hide
       button.innerText = t.hide;
+=======
+    if (solution) {
+        // 1. Textfeld
+        const inputArea = document.createElement('textarea');
+    inputArea.className = 'student-input';
+    inputArea.placeholder = t.placeholder;
+
+    // 2. Button
+    const button = document.createElement('button');
+    button.className = 'reveal-btn';
+    button.innerText = t.reveal;
+
+    // 3. Einfügen
+    caseBox.insertBefore(inputArea, solution);
+    caseBox.insertBefore(button, solution);
+
+    // 4. Klick-Logik
+    button.addEventListener('click', function() {
+          if (solution.style.display === 'block') {
+      solution.style.display = 'none';
+    button.innerText = t.reveal;
+          } else {
+      solution.style.display = 'block';
+    button.innerText = t.hide;
+>>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa
           }
         });
       }
     });
   } catch (e) {console.error("Error in Reflection Module:", e); }
 
+<<<<<<< HEAD
 });
     </script>
+=======
+// WICHTIG: Erst hier endet der Event-Listener für alle Module!
+});
+</script>
+>>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa

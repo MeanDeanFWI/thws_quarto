@@ -1,5 +1,3 @@
-
-
 # 📘 THWS Interactive Scripts – Quickstart Guide
 
 Diese Anleitung erklärt, wie Sie in 5 Minuten eine interaktive Vorlesungseinheit (PDF-Skript + Moodle-HTML) erstellen.
@@ -12,7 +10,11 @@ Stellen Sie sicher, dass folgende Software installiert ist:
 
 1. **[VS Code](https://code.visualstudio.com/)** (Editor)
 2. **[Quarto CLI](https://quarto.org/docs/get-started/)** (Der Generator)
+<<<<<<< HEAD
 3. **VS Code Extension:** Suchen Sie in VS Code (links bei den Quadraten) nach "Quarto" und installieren Sie die Extension.
+=======
+3. **VS Code Extension:** Suchen Sie in VS Code nach "Quarto" und installieren Sie die Extension.
+>>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa
 
 ---
 
@@ -24,7 +26,7 @@ Stellen Sie sicher, dass folgende Software installiert ist:
 4. Geben Sie folgenden Befehl ein, um die THWS-Vorlagen zu installieren:
 
 ```bash
-quarto add MeanDeanFWI/thws_quarto
+quarto add c-kraus/thws_quarto
 
 ```
 
@@ -35,9 +37,13 @@ quarto add MeanDeanFWI/thws_quarto
 ## 📝 3. Die Datei anlegen (YAML)
 
 Erstellen Sie eine neue Datei, z.B. `01_vorlesung.qmd`.
+<<<<<<< HEAD
 Kopieren Sie diesen Header **exakt** an den Anfang der Datei.
 
 💡 **Tipp:** Löschen Sie die Formate raus, die Sie gerade nicht brauchen (einfach mit `#` auskommentieren).
+=======
+Kopieren Sie diesen Header **exakt** an den Anfang der Datei:
+>>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa
 
 ```yaml
 ---
@@ -46,7 +52,10 @@ subtitle: "Untertitel"
 date: last-modified
 lang: de
 
-# Autoren-Daten (Wichtig für das Deckblatt)
+# WICHTIG: Link zur Web-Version für den automatischen QR-Code im PDF
+web_url: "https://ihr-user.github.io/kurs-name/01_vorlesung.html"
+
+# Autoren-Daten
 author:
   - name: Ihr Name
     email: ihr.name@thws.de
@@ -58,6 +67,7 @@ semester: "WS 25/26"
 course: "Modulname"
 version: "1.0"
 
+<<<<<<< HEAD
 # --- Ausgabe-Formate ---
 format:
   # 1. Skript (PDF) - Das volle Lehrbuch
@@ -71,6 +81,15 @@ format:
   # 3. Moodle (HTML) - Interaktiv für LMS
   #moodle-html:
     
+=======
+# Format wählen (beide gleichzeitig möglich beim Export)
+format:
+  # 1. Skript (PDF) - Statisch, druckreif
+  gtl_reader-typst: default
+    
+  # 2. Moodle (HTML) - Interaktiv
+  moodle-html: default
+>>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa
 ---
 ```
 
@@ -87,11 +106,14 @@ format:
 
 ## ✨ 4. Interaktive Elemente einbauen
 
-Schreiben Sie Ihren Inhalt in normalem Text. Nutzen Sie folgende Bausteine für Interaktionen:
+Das System folgt dem **"Single Source"** Prinzip: Sie schreiben einmal, das System generiert daraus automatisch interaktives HTML für Moodle und statische Boxen für das PDF.
 
 ### A. Lernkarten (Flip-Cards)
 
-Ideal für Definitionen. Der Titel ist die Vorderseite, der Inhalt die Rückseite.
+Ideal für Definitionen.
+
+* **Web:** Karte dreht sich per Klick.
+* **PDF:** Statische Definitions-Box.
 
 ```markdown
 ::: {.flip-card}
@@ -101,9 +123,46 @@ Der Return on Investment beschreibt die Kapitalrentabilität einer Investition.
 
 ```
 
-### B. Lückentext (Drag & Drop)
+### B. Deep Dives (Exkurse)
+
+Für komplexe Details oder Gesetzestexte, die den Lesefluss stören würden.
+
+* **Web:** Akkordeon (aufklappbar).
+* **PDF:** Abgesetzte Info-Box, damit der Inhalt sichtbar bleibt.
+
+```markdown
+::: {.details}
+#### Deep Dive: IAS 38
+Hier stehen komplexe Details zur Aktivierung von immateriellen Vermögenswerten...
+:::
+
+```
+
+### C. Fallstudien (Reflection Pattern)
+
+Trennt Problemstellung und Lösung.
+
+* **Web:** Lösung ist ggf. zunächst ausgeblendet.
+* **PDF:** Box mit klarer Trennlinie zur Lösung.
+
+```markdown
+::: {.case-study}
+#### Fall Müller
+Herr Müller hat vergessen, die Rückstellung zu bilden.
+
+::: {.solution}
+**Lösung:** Nach § 249 HGB besteht Passivierungspflicht.
+:::
+:::
+
+```
+
+### D. Lückentext (Drag & Drop)
 
 Markieren Sie die einzusetzenden Wörter *kursiv* mit Sternchen.
+
+* **Web:** Interaktives Drag & Drop Spiel.
+* **PDF:** Text ist lesbar, Lösungen sind **fett** gedruckt.
 
 ```markdown
 ::: {.drag-exercise}
@@ -112,9 +171,12 @@ Die Bilanz ist eine *Zeitpunktrechnung*, die GuV ist eine *Zeitraumrechnung*.
 
 ```
 
-### C. Quiz (Quick-Check)
+### E. Quiz (Quick-Check)
 
 Markieren Sie die richtige Antwort **fett**.
+
+* **Web:** Klickbares Quiz mit Feedback.
+* **PDF:** Checkliste zum Ankreuzen.
 
 ```markdown
 ::: {.quick-check}
@@ -127,6 +189,7 @@ Welches Prinzip gilt im HGB?
 
 ```
 
+<<<<<<< HEAD
 ### D. Fallstudien (Reflection Pattern)
 
 Erst nachdenken, dann Lösung sehen. Das Textfeld erscheint automatisch.
@@ -145,18 +208,31 @@ Nach § 249 HGB muss für ungewisse Verbindlichkeiten eine Rückstellung gebilde
 ```
 
 ### E. Videos (YouTube)
+=======
+### F. Videos (YouTube)
+>>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa
 
 Bettet Videos datenschutzkonform ein.
 
+* **Web:** Videoplayer.
+* **PDF:** Link-Box mit Hinweis.
+
 ```markdown
+<<<<<<< HEAD
 {{< video https://www.youtube.com/watch?v=VIDEO_ID >}}
+=======
+::: {.video}
+{{< video https://www.youtube.com/watch?v=VIDEO_ID >}}
+:::
+>>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa
 
 ```
 
 ---
 
-## 🖨️ 5. Ergebnis erstellen (Rendern)
+## 🔗 5. Hybrid-Publishing (QR-Codes)
 
+<<<<<<< HEAD
 Drücken Sie in VS Code oben rechts auf den **Render**-Button (blauer Pfeil) oder nutzen Sie das Terminal:
 
 * **Alles erstellen:** `quarto render 01_vorlesung.qmd`
@@ -164,3 +240,42 @@ Drücken Sie in VS Code oben rechts auf den **Render**-Button (blauer Pfeil) ode
 * **Nur PDF:** `quarto render 01_vorlesung.qmd --to reader-typst`
 
 🎉 **Fertig!** Laden Sie die HTML-Datei oder das PDF in Moodle hoch und danken Sie dem Studiendekan.
+=======
+Damit Studierende im gedruckten Skript (PDF) direkt zur interaktiven Version gelangen, wird automatisch ein QR-Code generiert.
+
+1. Definieren Sie im YAML-Header die `web_url` (siehe Schritt 3).
+2. Beim Erstellen des PDFs (`reader-typst`) erscheint oben rechts automatisch der QR-Code, der auf diese URL zeigt.
+
+*Tipp: Wenn Sie die URL leer lassen, wird kein Code generiert.*
+
+---
+
+## 🖨️ 6. Ergebnis erstellen (Rendern)
+
+1. Öffnen Sie die Datei in VS Code.
+2. Drücken Sie den **Render** Button (oder `Ctrl+Shift+K`).
+3. Wählen Sie das Format (HTML für Moodle, Typst für PDF).
+
+*Nachher dem Studiendekan danken.*
+
+## 🔄 7. Updates & Wartung
+
+Die THWS-Vorlagen werden stetig verbessert (neue Features, Design-Anpassungen). So halten Sie Ihr Skript aktuell:
+
+1.  Öffnen Sie das Terminal in Ihrem Projektordner.
+2.  Führen Sie denselben Befehl wie bei der Installation aus:
+
+```bash
+quarto add c-kraus/thws_quarto
+```
+
+Quarto erkennt, dass die Erweiterung bereits existiert und fragt: Extension '...' already exists. Overwrite? (y/n/a)
+
+Bestätigen Sie mit a (für "All") oder y.
+
+⚠️ Wichtig:
+
+Ihre Inhalte (Texte in .qmd-Dateien) bleiben dabei zu 100% sicher.
+
+Nur die Systemdateien im Ordner _extensions werden überschrieben. (Haben Sie dort manuell Dinge geändert, gehen diese verloren – was man ohnehin vermeiden sollte).
+>>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa

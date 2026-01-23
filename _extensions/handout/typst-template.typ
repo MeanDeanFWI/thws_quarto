@@ -1,9 +1,22 @@
 // ===========================================================
 // THWS-Handout-Template (Fixed Centering)
 // ===========================================================
+#import "@preview/cades:0.3.1": qr-code
 
 #let thws_orange = rgb("#ff6a00")
-
+#let flashcard(title: "Hinweis", body) = {
+  block(
+    width: 100%,
+    stroke: 0.5pt + rgb("#fa7d19"), // Oder die Farbe der jeweiligen Extension
+    inset: 1em,
+    radius: 3pt,
+    fill: white,
+  )[
+    #text(fill: rgb("#fa7d19"), weight: "bold")[#title]
+    #v(0.5em)
+    #body
+  ]
+}
 #let project(
   title: [Handout],
   subtitle: none,
@@ -22,6 +35,9 @@
   citation_style: none,
   show_outline: true,
   outline_depth: 2,
+  // Custom
+  web_url: none,
+  github_url: none,
   body,
 ) = {
   //----------------------------
@@ -161,6 +177,24 @@
     let outline_title = if lang == "de" { "Inhaltsübersicht" } else { "Contents" }
     outline(title: outline_title, depth: outline_depth)
     v(2em)
+  }
+
+  // QR-Logik
+  let qr_target = if web_url != none { web_url } else { github_url }
+
+  if qr_target != none {
+    // FIX: Kleiner & weiter in den Rand geschoben
+    // dx: 1.2cm = Schiebt ihn in den rechten Rand hinein
+    // dy: -2.5cm = Zieht ihn deutlich weiter nach oben
+    place(top + right, dx: 1.2cm, dy: -2.5cm)[
+      #align(center)[
+        // Width reduziert von 2cm auf 1.4cm
+        #qr-code(qr_target, width: 1.4cm, color: rgb("#666666")) // Farbe etwas dezenter (grau statt schwarz)
+        #v(0.05cm)
+        // Textgröße angepasst
+        #text(size: 4.5pt, font: ("Helvetica", "Arial"), fill: gray.darken(10%))[Online \ Version]
+      ]
+    ]
   }
 
   // BODY

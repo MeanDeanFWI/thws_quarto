@@ -1,7 +1,11 @@
 /.luarc.json
 
-# macOS Systemdateien (Hässlich in Repos)
+# --- MacOS Systemmüll (The Apple Trap) ---
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
 
 # VS Code Settings (optional, wenn du sie nicht teilen willst)
 .vscode/

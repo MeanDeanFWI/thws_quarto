@@ -21,13 +21,9 @@ $if(by-author)$
       $if(it.email)$ email: "$it.email$".replace("\\", ""), $endif$
 
       // 3. Rolle
-      // Wir prüfen ZUERST auf den einfachen String 'role'. 
-      // Das verhindert, dass "Program Lead" zerhackt wird.
       $if(it.role)$
         role: "$it.role$".replace("\\", ""),
       $else$
-        // Falls keine einzelne Rolle da ist, schauen wir in die Liste.
-        // WICHTIG: Hier '$it.role$' nutzen, nicht '$it$'!
         $if(it.roles)$
           role: "$for(it.roles)$$it.role$$sep$ $endfor$".replace("\\", ""),
         $endif$
@@ -55,6 +51,11 @@ $if(semester)$ semester: [$semester$], $endif$
 $if(faculty)$ faculty: [$faculty$], $endif$
 $if(university)$ university: [$university$], $endif$
 $if(version)$ version: [$version$], $endif$
+
+// --- NEU: QR-Code URLs ---
+// Das Lua-Skript füllt 'web_url' automatisch, hier reichen wir es an Typst weiter.
+$if(web_url)$ web_url: "$web_url$", $else$$if(web-url)$ web_url: "$web-url$", $endif$$endif$
+$if(github_url)$ github_url: "$github_url$", $else$$if(github-url)$ github_url: "$github-url$", $endif$$endif$
 
 // Layout-Steuerung
 $if(outline-depth)$ outline_depth: $outline-depth$, $endif$

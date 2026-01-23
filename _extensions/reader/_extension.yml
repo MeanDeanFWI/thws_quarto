@@ -8,6 +8,12 @@ contributes:
       template-partials:
         - typst-template.typ
         - typst-show.typ
+<<<<<<< HEAD
 resources:
   - logo/logo.svg
   - logo/logo_en.svg
+=======
+      filters:            # <--- HIER EINFÜGEN
+        - filter.lua     
+
+>>>>>>> f9e528ff850fed6a228f6deb4144c86a98b6feaa
