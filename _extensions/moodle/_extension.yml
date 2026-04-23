@@ -11,10 +11,10 @@ contributes:
       - <link rel="preconnect" href="https://fonts.googleapis.com">
       - <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       - <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-      include-before-body: header.html
       include-after-body: interactions.js
       toc: true
       number-sections: true
       self-contained: true
-      filters:            # <--- HIER EINFÜGEN
-        - h4-fix.lua      # <---
+      filters:
+        - inject-header.lua
+        - h4-fix.lua

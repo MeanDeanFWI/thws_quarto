@@ -1,21 +1,18 @@
 <div id="custom-header">
-  <img src="thws-logo_horiz_en_orange-rgb.png" alt="THWS Logo">
+  <img src="logo_en.svg" alt="THWS Logo">
 </div>
 
 <script>
-
 window.onscroll = function() {
   const header = document.getElementById("custom-header");
   const sidebar = document.getElementById("quarto-margin-sidebar");
-  
+
   if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
     header.classList.add("shrink");
-    sidebar.classList.add("scrollmargin");
+    if (sidebar) sidebar.classList.add("scrollmargin");
   } else {
     header.classList.remove("shrink");
-    sidebar.classList.remove("scrollmargin");
+    if (sidebar) sidebar.classList.remove("scrollmargin");
   }
 };
-
-
 </script>
