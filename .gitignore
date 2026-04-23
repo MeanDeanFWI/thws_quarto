@@ -1,4 +1,6 @@
 /.luarc.json
+.quarto/
+_quarto_internal_scss_error.scss
 
 # --- MacOS Systemmüll (The Apple Trap) ---
 .DS_Store
