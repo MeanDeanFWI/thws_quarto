@@ -1,0 +1,264 @@
+/*-- scss:defaults --*/
+
+// 1. Google Font zuweisen
+$font-family-sans-serif: 'Inter', sans-serif;
+
+// 2. Farben
+$primary: #ff6a00;    // Hauptfarbe (Links, Haupt-Buttons)
+$secondary: #005564;  // Dezente Elemente
+$accent: #005564;     // Orange für Akzente
+$body-bg: #ffffff;
+$body-color: #343a40; // Haupt-Textfarbe
+$light-grey: #e7e7e7;
+
+$success: #005564;    // "Richtig"-Meldungen im Quiz
+$info: #ff6a00;       // Informationen / Hinweise
+$warning: #c4515b;    // Achtung-Meldungen
+$danger: #c4515b;     // Fehler / "Falsch"-Meldungen im Quiz
+
+$link-color: $primary;
+$link-decoration: none;
+$selection-bg: $accent;
+
+$callout-color-note: $body-color;
+$callout-color-tip: $secondary;
+$callout-color-important: $primary;
+$callout-color-warning: $danger;
+$callout-color-caution: $danger;
+
+// 3. Überschriftengrößen
+$h1-font-size: 2rem;
+$h2-font-size: 1.5rem;
+$h3-font-size: 1.2rem;
+
+/*-- scss:rules --*/
+
+// Header Bar Styling
+
+#custom-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: $accent;
+  width: 100vw;
+  padding: 0.5em;
+  margin-bottom: 1.5em;
+  transition: all 0.2s ease-in-out;
+}
+
+#custom-header img {
+  height: 4em;
+  width: auto;
+  margin-left: 2em;
+  transition: transform 0.2s ease-in-out;
+}
+
+#custom-header.shrink {
+  height: 3.2em;
+  padding: 0.2em;
+}
+
+#custom-header.shrink img {
+  transform: scale(0.8);
+  margin-top: -0.5em;
+}
+
+#quarto-margin-sidebar.scrollmargin {
+  padding-top: 4em;
+}
+
+body {
+  margin-top: 6em;
+}
+
+.quarto-title-block {
+  padding-bottom: 3em;
+}
+
+@media screen and (max-width: 600px) {
+  .custom-header img {
+    height: 3em;
+    width: auto;
+    margin-left: 1.5em;
+  }
+}
+
+// Überschriften-Design
+h1, h2 {
+  color: $primary;
+  font-weight: 700;
+  margin-top: 2.5em;
+}
+
+h1 .header-section-number, h2 .header-section-number {
+   color: $primary;
+}
+
+h3 .header-section-number {
+   color: $body-color;
+}
+
+caption {
+  text-align: left;
+}
+
+// TOC
+#toc-title {margin-bottom: 1em;}
+#toc li {margin:0;}
+
+// Tabs
+.nav-tabs, .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+  border-radius: 10px 10px 0px 0px;
+}
+.nav-tabs .nav-link.active {
+  background-color: $primary;
+  color: #fff;
+  border: 0px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.tab-content {
+  background-color: $primary;
+  color: #fff;
+  border: 0px;
+  border-radius: 0px 0px 10px 10px;
+}
+
+// Tabellen
+thead {background-color: $body-color; color: #fff;}
+tbody tr.even {background-color: $light-grey;}
+
+// Blockquote
+blockquote {
+  margin: 2em 0;
+  padding: 1.5em 2em;
+  border-left: 4px solid $primary;
+  background-color: rgba($light-grey, 0.2);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: lighten($body-color, 80%);
+  position: relative;
+
+  &::before {
+    content: "\201C";
+    font-family: serif;
+    font-size: 4em;
+    position: absolute;
+    left: 10px;
+    top: -10px;
+    color: rgba($body-color, 0.1);
+    line-height: 1;
+  }
+
+  cite {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9em;
+    font-style: normal;
+    font-weight: bold;
+    color: $primary;
+    text-align: right;
+
+    &::before {
+      content: "— ";
+    }
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Quiz: MC and SC
+.quick-check::before {
+  content: "Select the right answer to see if you're correct.";
+  font-size: 0.9em;
+  color: hsl(210,10.3448275862%,47.7450980392%);
+  margin-bottom: 0.7em;
+  display: block;
+}
+
+// Quiz: Drag
+.drag-exercise:before {
+  content: "Select the word and then the corresponding blank. Check your selection when you're done.";
+  font-size: 0.9em;
+  color: hsl(210,10.3448275862%,47.7450980392%);
+  margin-bottom: 0.7em;
+  display: block;
+}
+
+// Callout
+.callout-warning {
+  border-left-color: $primary !important;
+}
+
+// Sidebar Logo
+.sidebar-logo {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+
+  img {
+    max-width: 80%;
+    max-height: 80px;
+    height: auto;
+    width: auto;
+  }
+}
+
+// Accordion (Details & Summary)
+details {
+  margin-bottom: 1rem;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+}
+
+summary {
+  display: block;
+  position: relative;
+  padding: 15px 15px 15px 50px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.15rem;
+  color: $primary;
+  background-color: rgba($primary, 0.05);
+  transition: background-color 0.2s;
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary:hover {
+  background-color: rgba($primary, 0.1);
+}
+
+summary::before {
+  content: "▶";
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: $primary;
+  transition: transform 0.3s ease;
+}
+
+details[open] summary::before {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+details[open] summary {
+  border-bottom: 1px solid #eee;
+}
+
+details > *:not(summary) {
+  padding: 20px 20px 20px 50px;
+  color: $body-color;
+}
