@@ -264,4 +264,16 @@ const logoContainer = document.createElement('div');
 
 } catch (e) {console.error("Error in Sidebar Logo Module:", e); }
 });
+
+// --- MODUL 6: Widget iFrame Auto-Resize ---
+window.addEventListener('message', function(event) {
+  if (!event.data || typeof event.data.iframeHeight !== 'number') return;
+  document.querySelectorAll('iframe').forEach(function(iframe) {
+    try {
+      if (iframe.contentWindow === event.source) {
+        iframe.style.height = event.data.iframeHeight + 'px';
+      }
+    } catch(e) {}
+  });
+});
     </script>
