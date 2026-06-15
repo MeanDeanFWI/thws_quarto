@@ -6,7 +6,7 @@ contributes:
   formats:
     html:
       theme: [cosmo, thws-styles.scss]
-      css: drag.css
+      css: [fonts.css, drag.css]
       include-after-body: interactions.js
       toc: true
       number-sections: true
