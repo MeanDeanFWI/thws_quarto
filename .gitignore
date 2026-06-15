@@ -11,3 +11,6 @@ _quarto_internal_scss_error.scss
 
 # VS Code Settings (optional, wenn du sie nicht teilen willst)
 .vscode/
+
+# Excalidraw
+excalidraw.log
