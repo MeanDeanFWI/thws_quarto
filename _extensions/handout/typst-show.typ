@@ -9,18 +9,13 @@ $if(abstract)$
   abstract: [$abstract$],
 $endif$
 
-// FIX: Reihenfolge gedreht & 'it.role' in der Schleife benutzt
+// Autoren: Reihenfolge & Rollen aus dem Quarto-Author-Schema
 $if(by-author)$
   authors: (
     $for(by-author)$
     (
-      // 1. Name: Tilden weg
       name: "$it.name.literal$".replace("~", " "),
-      
-      // 2. Email: Backslashes weg
       $if(it.email)$ email: "$it.email$".replace("\\", ""), $endif$
-
-      // 3. Rolle
       $if(it.role)$
         role: "$it.role$".replace("\\", ""),
       $else$
@@ -28,8 +23,6 @@ $if(by-author)$
           role: "$for(it.roles)$$it.role$$sep$ $endfor$".replace("\\", ""),
         $endif$
       $endif$
-
-      // 4. Affiliation
       $if(it.affiliations)$
         affiliation: "$for(it.affiliations)$$it.name$$sep$, $endfor$".replace("\\", ""),
       $endif$
@@ -39,11 +32,18 @@ $if(by-author)$
 $endif$
 
 $if(date)$
-  date: [$date$],
+  date: "$date$".replace("\\", ""),
 $endif$
 $if(lang)$
   lang: "$lang$",
 $endif$
+
+// Logo: eigener Key 'handout-logo' (NICHT 'logo' — das ist von Quartos
+// Brand-System reserviert und käme nur als "true" an). 'handout-logo-en' für
+// die englische Wortmarke. Beide werden vom filter.lua automatisch relativ zur
+// Extension aufgelöst, falls nicht gesetzt. .replace entfernt Pandoc-Backslashes.
+$if(handout-logo)$ logo: "$handout-logo$".replace("\\", ""), $endif$
+$if(handout-logo-en)$ logo_en: "$handout-logo-en$".replace("\\", ""), $endif$
 
 // Optionale Overrides
 $if(course)$ course: [$course$], $endif$
@@ -52,8 +52,7 @@ $if(faculty)$ faculty: [$faculty$], $endif$
 $if(university)$ university: [$university$], $endif$
 $if(version)$ version: [$version$], $endif$
 
-// --- NEU: QR-Code URLs ---
-// Das Lua-Skript füllt 'web_url' automatisch, hier reichen wir es an Typst weiter.
+// QR-Code-URLs — 'web_url' wird vom filter.lua automatisch befüllt
 $if(web_url)$ web_url: "$web_url$", $else$$if(web-url)$ web_url: "$web-url$", $endif$$endif$
 $if(github_url)$ github_url: "$github_url$", $else$$if(github-url)$ github_url: "$github-url$", $endif$$endif$
 
@@ -61,8 +60,7 @@ $if(github_url)$ github_url: "$github_url$", $else$$if(github-url)$ github_url: 
 $if(outline-depth)$ outline_depth: $outline-depth$, $endif$
 $if(show-outline)$ show_outline: $show-outline$, $endif$
 
-// Bibliographie
-//$if(bibliography)$ bib_file: "$bibliography$", $endif$
-//$if(biblio-style)$ citation_style: "$biblio-style$", $endif$
+// Bibliographie: Quarto (>= 1.8) erzeugt den #bibliography(...)-Call selbst;
+// das Template stylt ihn per `show bibliography`-Hook (kein bib_file mehr nötig).
   doc,
 )
