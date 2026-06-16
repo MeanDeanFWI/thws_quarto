@@ -5,8 +5,9 @@
 Testbar mit `quarto add c-kraus/thws_quarto@dev`.
 
 ### tutorial
-- Aufgaben-Headings (`#### Task N`) mit mehr Abstand zum Folgetext (war zu beengt).
-- H2-Aufgabenkopf: Nummern-Badge bündig zur Unterkante des Titels (statt mittig zentriert).
+- Aufgaben-Headings (`#### Task N`): mehr Abstand davor und danach (war zu beengt).
+- H2-Aufgabenkopf: Nummern-Badge auf Höhe von Kicker + Titel — „CASE STUDY" oben,
+  Titel unten bündig mit den Kästchen-Kanten; Titel sitzt dicht unter dem Kicker.
 
 ## [2.0.0] — 2026-06-16
 
