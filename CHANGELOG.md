@@ -1,8 +1,8 @@
 # Changelog
 
-## [2.0.1] — auf `dev` (noch nicht auf `main`)
+## [2.0.1] — 2026-06-16
 
-Testbar mit `quarto add c-kraus/thws_quarto@dev`.
+Patch-Release: nur `tutorial`-Layout. `reader`/`handout` unverändert (bleiben funktional 2.0.0).
 
 ### tutorial
 - Aufgaben-Headings (`#### Task N`): mehr Abstand davor und danach (war zu beengt).
