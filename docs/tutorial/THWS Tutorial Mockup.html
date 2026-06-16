@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THWS Übungsblatt — Redesign Mockup</title>
+<style>
+  :root{
+    --orange:#EC6500; --orange-600:#D25400; --orange-tint:#FFF4EB;
+    --teal:#005564; --teal-600:#00424F; --teal-tint:#EAF1F2;
+    --ink:#1F1D1A; --ink-soft:#3A3733; --muted:#6B655D; --faint:#9A938A;
+    --line:#E4E0DA; --line-strong:#CFC9C0; --paper:#FFFFFF; --sunken:#F7F5F2;
+    --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,monospace;
+    --pw:794px; --ph:1123px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:linear-gradient(135deg,#74706a,#56524d);
+    font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;
+    padding:48px 0 80px;
+  }
+  .logo{display:inline-block;fill:var(--ink);}
+  .logo path{fill:inherit;}
+
+  .sheet{
+    width:var(--pw);min-height:var(--ph);margin:0 auto 40px;background:var(--paper);
+    box-shadow:0 18px 50px rgba(0,0,0,.32);position:relative;overflow:hidden;
+  }
+
+  /* running header */
+  .run-head{
+    position:absolute;top:0;left:0;right:0;height:80px;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 48px;border-bottom:1px solid var(--line);
+  }
+  .run-head .logo{width:96px;height:47px;fill:var(--orange);}
+  .run-head .meta{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:right;}
+  .run-head .meta b{color:var(--orange);font-weight:700;}
+
+  .run-foot{
+    position:absolute;bottom:0;left:0;right:0;
+    padding:0 48px 22px;
+  }
+  .run-foot .rule{height:1px;background:var(--line);margin-bottom:8px;}
+  .run-foot .row{display:flex;align-items:baseline;justify-content:space-between;
+    font-size:9px;letter-spacing:.06em;color:var(--faint);}
+  .run-foot .row .left b{color:var(--ink-soft);font-weight:700;}
+  .run-foot .row .sep{color:var(--orange);margin:0 7px;}
+  .run-foot .pg{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);}
+  .run-foot .pg b{color:var(--orange);font-weight:700;}
+  .run-foot.simple{display:flex;flex-direction:column;align-items:center;}
+  .run-foot.simple .rule{width:100%;}
+  .run-foot.simple .pgc{font-size:11px;color:var(--orange);font-weight:700;}
+
+  .page-body{padding:80px 48px 96px;min-height:var(--ph);}
+
+  /* ===== MASTHEAD (statt Deckblatt) ===== */
+  .masthead{padding-top:26px;margin-bottom:8px;}
+  .mh-eyebrow{
+    font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--orange);font-weight:700;
+    display:flex;align-items:center;gap:12px;margin-bottom:14px;
+  }
+  .mh-eyebrow .nr{color:var(--teal);}
+  .mh-title{font-size:32px;line-height:1.08;font-weight:700;color:var(--ink);letter-spacing:-.015em;margin:0;text-wrap:balance;}
+  .mh-sub{font-size:15px;color:var(--muted);margin:10px 0 0;line-height:1.4;}
+  .mh-rule{height:3px;width:60px;background:var(--orange);margin:18px 0 16px;}
+  .mh-meta{
+    display:flex;flex-wrap:wrap;gap:26px;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .mh-meta .k{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:3px;}
+  .mh-meta .v{font-size:13px;font-weight:700;color:var(--ink);}
+  .mh-meta .v.accent{color:var(--teal);}
+
+  /* ===== AUFGABE ===== */
+  .aufgabe{display:flex;align-items:flex-start;gap:16px;margin:34px 0 12px;}
+  .aufgabe .badge{
+    flex-shrink:0;width:34px;height:34px;background:var(--orange);border-radius:6px;
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:700;
+    margin-top:2px;
+  }
+  .aufgabe .head{flex:1;}
+  .aufgabe .kicker{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:700;}
+  .aufgabe h2{font-size:18px;font-weight:700;color:var(--ink);margin:3px 0 0;letter-spacing:-.005em;}
+  .aufgabe .points{
+    flex-shrink:0;margin-top:4px;font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--orange-600);
+    border:1.5px solid var(--orange);border-radius:999px;padding:4px 11px;text-transform:uppercase;
+  }
+
+  .body p{font-size:13px;line-height:1.6;margin:0 0 .8em;color:var(--ink-soft);}
+  ol.sub{margin:.4em 0 1em;padding-left:1.5em;}
+  ol.sub li{font-size:13px;line-height:1.55;color:var(--ink-soft);margin-bottom:7px;}
+  ol.sub li::marker{color:var(--orange);font-weight:700;}
+
+  /* ===== LÖSUNG callout (Kernfeature Übungsblatt) ===== */
+  .loesung{
+    border:1px solid var(--teal);border-left:4px solid var(--teal);border-radius:7px;
+    background:var(--teal-tint);margin:14px 0 6px;overflow:hidden;
+  }
+  .loesung .inner{padding:13px 18px;}
+  .loesung .eyebrow{
+    font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--teal);
+    display:flex;align-items:center;gap:9px;margin-bottom:7px;
+  }
+  .loesung .key{width:16px;height:16px;border-radius:50%;background:var(--teal);color:#fff;
+    display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;}
+  .loesung p{font-size:12.5px;line-height:1.55;margin:0 0 .6em;color:var(--ink-soft);}
+  .loesung p:last-child{margin-bottom:0;}
+  .loesung strong{color:var(--ink);}
+
+  /* ===== shared boxes (wie Reader) ===== */
+  .box{border:1px solid var(--line);border-radius:7px;margin:16px 0;overflow:hidden;background:#fff;}
+  .box-eyebrow{display:flex;align-items:center;gap:9px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;}
+  .box-body{font-size:12.5px;line-height:1.6;color:var(--ink-soft);}
+  .glyph{width:16px;height:16px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;}
+
+  .box.hinweis{border-left:4px solid var(--teal);background:var(--teal-tint);}
+  .box.hinweis .inner{padding:13px 18px;}
+  .box.hinweis .box-eyebrow{color:var(--teal);margin-bottom:7px;}
+  .box.hinweis .glyph{background:var(--teal);border-radius:50%;color:#fff;font-size:11px;font-weight:700;font-style:italic;}
+
+  .box.quiz .inner{padding:14px 18px;}
+  .box.quiz .box-eyebrow{color:var(--orange-600);margin-bottom:6px;}
+  .box.quiz .glyph{background:var(--orange);border-radius:3px;}
+  .box.quiz .q{font-weight:700;color:var(--ink);font-size:13px;margin:0 0 10px;}
+  .box.quiz ul{list-style:none;margin:0;padding:0;}
+  .box.quiz li{display:flex;align-items:flex-start;gap:10px;font-size:12.5px;color:var(--ink-soft);margin-bottom:7px;}
+  .box.quiz .cb{width:15px;height:15px;border:1.5px solid var(--line-strong);border-radius:3px;flex-shrink:0;margin-top:1px;}
+  .box.quiz li.correct .cb{background:var(--orange);border-color:var(--orange);position:relative;}
+  .box.quiz li.correct .cb::after{content:"✓";color:#fff;font-size:11px;font-weight:700;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+  .box.quiz li.correct span{font-weight:700;color:var(--ink);}
+  .box.quiz .fb{margin-top:9px;padding-left:14px;border-left:3px solid var(--teal);font-size:11.5px;font-style:italic;color:var(--muted);}
+
+  .box.gaps{border-left:4px solid var(--orange);background:var(--orange-tint);}
+  .box.gaps .inner{padding:13px 18px;}
+  .box.gaps .box-eyebrow{color:var(--orange-600);margin-bottom:7px;}
+  .box.gaps .glyph{background:var(--orange);border-radius:3px;}
+  .box.gaps .gap{font-weight:700;color:var(--ink);border-bottom:2px solid var(--orange);padding:0 2px;}
+
+  table.tbl{width:100%;border-collapse:collapse;margin:14px 0;font-size:12px;}
+  table.tbl th{background:var(--teal);color:#fff;text-align:left;padding:7px 10px;font-weight:700;font-size:10.5px;letter-spacing:.04em;}
+  table.tbl td{padding:7px 10px;border-bottom:1px solid var(--line);color:var(--ink-soft);}
+  table.tbl tr:nth-child(even) td{background:var(--sunken);}
+
+  .legend{width:var(--pw);margin:0 auto 30px;color:#fff;font-family:var(--mono);font-size:12px;opacity:.92;}
+  .legend .pill{display:inline-block;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.18);padding:6px 12px;border-radius:999px;margin:0 6px 6px 0;}
+  .legend h2{font-family:var(--sans);font-size:15px;letter-spacing:.02em;margin:0 0 10px;font-weight:700;}
+</style>
+</head>
+<body>
+
+  <div class="legend">
+    <h2>THWS Übungsblatt — Redesign-Mockup (A4)</h2>
+    <span class="pill">Masthead statt Deckblatt</span>
+    <span class="pill">Aufgaben-Badges</span>
+    <span class="pill">Lösungs-Callout (teal)</span>
+    <span class="pill">gleiche Box-Sprache wie Reader</span>
+  </div>
+
+  <!-- ===================== PAGE 1 ===================== -->
+  <section class="sheet" data-screen-label="Übungsblatt — Seite 1">
+    <div class="run-head">
+      <svg class="logo" viewBox="0 0 358.1 175"><g>
+&#x9;<g>
+&#x9;&#x9;<path class="st0" d="M35,52.5h2.6c1.1,0,2-0.9,2-2v-9.1c0-1.1,0.9-2,2-2h15.6c1.1,0,2-0.9,2-2v-2.6c0-1.1-0.9-2-2-2H41.5&#xA;&#x9;&#x9;&#x9;c-1.1,0-2,0.9-2,2v2.6c0,1.1-0.9,2-2,2H35c-1.1,0-2,0.9-2,2v9.1C33,51.6,33.9,52.5,35,52.5z"></path>
+&#x9;&#x9;<path class="st0" d="M83.1,19.9H67.5c-1.1,0-2,0.9-2,2v2.6c0,1.1,0.9,2,2,2h15.6c1.1,0,2-0.9,2-2v-2.6&#xA;&#x9;&#x9;&#x9;C85.1,20.8,84.2,19.9,83.1,19.9z"></path>
+&#x9;&#x9;<path class="st0" d="M96.1,32.9h-2.6c-1.1,0-2,0.9-2,2V44c0,1.1,0.9,2,2,2h2.6c1.1,0,2-0.9,2-2v-9.1&#xA;&#x9;&#x9;&#x9;C98.1,33.8,97.2,32.9,96.1,32.9z"></path>
+&#x9;&#x9;<path class="st0" d="M96.1,52.5h-2.6c-1.1,0-2,0.9-2,2V57c0,1.1,0.9,2,2,2h2.6c1.1,0,2-0.9,2-2v-2.6&#xA;&#x9;&#x9;&#x9;C98.1,53.3,97.2,52.5,96.1,52.5z"></path>
+&#x9;&#x9;<path class="st0" d="M72.1,54.4c0-1.1-0.9-2-2-2h-2.6c-1.1,0-2,0.9-2,2v22.1c0,1.1-0.9,2-2,2h-9.1c-1.1,0-2-0.9-2-2V54.4&#xA;&#x9;&#x9;&#x9;c0-1.1,0.9-2,2-2h2.6c1.1,0,2-0.9,2-2v-2.6c0-1.1-0.9-2-2-2h-2.6c-1.1,0-2,0.9-2,2v2.6c0,1.1-0.9,2-2,2H48c-1.1,0-2,0.9-2,2V83&#xA;&#x9;&#x9;&#x9;c0,1.1,0.9,2,2,2h15.6c1.1,0,2-0.9,2-2v-2.6c0-1.1,0.9-2,2-2h2.6c1.1,0,2-0.9,2-2V54.4z"></path>
+&#x9;&#x9;<path class="st0" d="M83.1,32.9H67.5c-1.1,0-2,0.9-2,2v2.6c0,1.1,0.9,2,2,2h9.1c1.1,0,2,0.9,2,2V57c0,1.1,0.9,2,2,2h2.6&#xA;&#x9;&#x9;&#x9;c1.1,0,2-0.9,2-2V34.9C85.1,33.8,84.2,32.9,83.1,32.9z"></path>
+&#x9;&#x9;<path class="st0" d="M83.1,65.5h-2.6c-1.1,0-2,0.9-2,2v22.1c0,1.1-0.9,2-2,2H74c-1.1,0-2,0.9-2,2v2.6c0,1.1,0.9,2,2,2h2.6&#xA;&#x9;&#x9;&#x9;c1.1,0,2-0.9,2-2v-2.6c0-1.1,0.9-2,2-2h2.6c1.1,0,2-0.9,2-2V67.4C85.1,66.4,84.2,65.5,83.1,65.5z"></path>
+&#x9;&#x9;<path class="st0" d="M63.6,91.5H41.5c-1.1,0-2-0.9-2-2V67.4c0-1.1-0.9-2-2-2H35c-1.1,0-2,0.9-2,2v22.1c0,1.1,0.9,2,2,2h2.6&#xA;&#x9;&#x9;&#x9;c1.1,0,2,0.9,2,2v2.6c0,1.1,0.9,2,2,2h22.1c1.1,0,2-0.9,2-2v-2.6C65.5,92.4,64.7,91.5,63.6,91.5z"></path>
+&#x9;&#x9;<path class="st0" d="M50.6,104.5H35c-1.1,0-2,0.9-2,2v2.6c0,1.1,0.9,2,2,2h15.6c1.1,0,2-0.9,2-2v-2.6&#xA;&#x9;&#x9;&#x9;C52.5,105.4,51.7,104.5,50.6,104.5z"></path>
+&#x9;&#x9;<path class="st0" d="M24.6,78.5H22c-1.1,0-2,0.9-2,2v9.1c0,1.1,0.9,2,2,2h2.6c1.1,0,2-0.9,2-2v-9.1C26.5,79.4,25.6,78.5,24.6,78.5&#xA;&#x9;&#x9;&#x9;z"></path>
+&#x9;</g>
+&#x9;<g>
+&#x9;&#x9;<path class="st0" d="M121.4,108.3H117V106h11.1v2.3h-4.3V120h-2.5V108.3z"></path>
+&#x9;&#x9;<path class="st0" d="M127.4,115.1c0-3.1,2-5.1,4.8-5.1c2.9,0,4.7,1.9,4.7,5c0,0.3,0,0.7-0.1,1.1h-7.1c0.1,1.5,1.1,2.3,2.5,2.3&#xA;&#x9;&#x9;&#x9;c1,0,1.7-0.5,2-1.2h2.4c-0.6,1.9-2.1,3.1-4.5,3.1C129.4,120.3,127.4,118.2,127.4,115.1z M134.6,114.1L134.6,114.1&#xA;&#x9;&#x9;&#x9;c0-1.3-0.9-2.2-2.3-2.2c-1.4,0-2.4,0.9-2.4,2.2H134.6z"></path>
+&#x9;&#x9;<path class="st0" d="M138.4,115.2c0-3.1,2-5.2,5-5.2c2.5,0,4.3,1.5,4.5,3.6h-2.4c-0.2-0.8-0.9-1.5-2.1-1.5c-1.5,0-2.5,1.2-2.5,3&#xA;&#x9;&#x9;&#x9;c0,1.9,1,3,2.5,3c1.1,0,1.9-0.7,2.1-1.7h2.4c-0.3,2-1.9,3.8-4.6,3.8C140.2,120.3,138.4,118.1,138.4,115.2z"></path>
+&#x9;&#x9;<path class="st0" d="M149.6,106h2.4v5c0.6-0.7,1.6-1.1,2.6-1.1c2.4,0,3.9,1.5,3.9,4.2v5.9h-2.4v-5.7c0-1.5-0.7-2.2-2-2.2&#xA;&#x9;&#x9;&#x9;c-1.3,0-2.2,0.9-2.2,2.3v5.6h-2.4V106z"></path>
+&#x9;&#x9;<path class="st0" d="M161,110.2h2.1v1.1c0.6-1,1.7-1.4,2.9-1.4c2.4,0,3.9,1.5,3.9,4.2v5.9h-2.4v-5.7c0-1.5-0.7-2.2-2-2.2&#xA;&#x9;&#x9;&#x9;c-1.3,0-2.2,0.9-2.2,2.3v5.6H161V110.2z"></path>
+&#x9;&#x9;<path class="st0" d="M172.2,106.1h2.6v2.4h-2.6V106.1z M172.3,110.2h2.4v9.8h-2.4V110.2z"></path>
+&#x9;&#x9;<path class="st0" d="M176.5,117.2h2.5c0.1,0.8,0.8,1.2,2,1.2c1.1,0,1.7-0.5,1.7-1.2c0-0.6-0.5-0.9-1.3-1l-1.6-0.2&#xA;&#x9;&#x9;&#x9;c-1.8-0.2-3-1.3-3-2.9c0-1.9,1.6-3.1,4-3.1c2.5,0,4,1,4.1,3.1h-2.4c0-0.8-0.7-1.1-1.8-1.1c-1,0-1.7,0.4-1.7,1.1&#xA;&#x9;&#x9;&#x9;c0,0.6,0.5,0.9,1.4,1l1.6,0.2c1.8,0.2,2.9,1.3,2.9,2.9c0,2-1.6,3.2-4.2,3.2C178.2,120.3,176.6,119.2,176.5,117.2z"></path>
+&#x9;&#x9;<path class="st0" d="M186.4,115.2c0-3.1,2-5.2,5-5.2c2.5,0,4.3,1.5,4.5,3.6h-2.4c-0.2-0.8-0.9-1.5-2.1-1.5c-1.5,0-2.5,1.2-2.5,3&#xA;&#x9;&#x9;&#x9;c0,1.9,1,3,2.5,3c1.1,0,1.9-0.7,2.1-1.7h2.4c-0.3,2-1.9,3.8-4.6,3.8C188.2,120.3,186.4,118.1,186.4,115.2z"></path>
+&#x9;&#x9;<path class="st0" d="M197.6,106h2.4v5c0.6-0.7,1.6-1.1,2.6-1.1c2.4,0,3.9,1.5,3.9,4.2v5.9h-2.4v-5.7c0-1.5-0.7-2.2-2-2.2&#xA;&#x9;&#x9;&#x9;c-1.3,0-2.2,0.9-2.2,2.3v5.6h-2.4V106z"></path>
+&#x9;&#x9;<path class="st0" d="M208.4,115.1c0-3.1,2-5.1,4.8-5.1c2.9,0,4.7,1.9,4.7,5c0,0.3,0,0.7-0.1,1.1h-7.1c0.1,1.5,1.1,2.3,2.5,2.3&#xA;&#x9;&#x9;&#x9;c1,0,1.7-0.5,2-1.2h2.4c-0.6,1.9-2.1,3.1-4.5,3.1C210.3,120.3,208.4,118.2,208.4,115.1z M215.5,114.1L215.5,114.1&#xA;&#x9;&#x9;&#x9;c0-1.3-0.9-2.2-2.3-2.2c-1.4,0-2.4,0.9-2.4,2.2H215.5z"></path>
+&#x9;&#x9;<path class="st0" d="M233.8,113.8h-6.3v6.2H225v-14h2.5v5.5h6.3V106h2.5v14h-2.5V113.8z"></path>
+&#x9;&#x9;<path class="st0" d="M238.5,115.1c0-3.1,2.1-5.2,5.1-5.2c3,0,5.1,2.1,5.1,5.2s-2.1,5.2-5.1,5.2&#xA;&#x9;&#x9;&#x9;C240.6,120.3,238.5,118.2,238.5,115.1z M243.6,118.1c1.6,0,2.6-1.2,2.6-3c0-1.8-1.1-3-2.6-3c-1.6,0-2.6,1.2-2.6,3&#xA;&#x9;&#x9;&#x9;C241,116.9,242,118.1,243.6,118.1z"></path>
+&#x9;&#x9;<path class="st0" d="M250.1,115.2c0-3.1,2-5.2,5-5.2c2.5,0,4.3,1.5,4.5,3.6h-2.4c-0.2-0.8-0.9-1.5-2.1-1.5c-1.5,0-2.5,1.2-2.5,3&#xA;&#x9;&#x9;&#x9;c0,1.9,1,3,2.5,3c1.1,0,1.9-0.7,2.1-1.7h2.4c-0.3,2-1.9,3.8-4.6,3.8C252,120.3,250.1,118.1,250.1,115.2z"></path>
+&#x9;&#x9;<path class="st0" d="M261.4,106h2.4v5c0.6-0.7,1.6-1.1,2.6-1.1c2.4,0,3.9,1.5,3.9,4.2v5.9h-2.4v-5.7c0-1.5-0.7-2.2-2-2.2&#xA;&#x9;&#x9;&#x9;c-1.3,0-2.2,0.9-2.2,2.3v5.6h-2.4V106z"></path>
+&#x9;&#x9;<path class="st0" d="M272,117.2h2.5c0.1,0.8,0.8,1.2,2,1.2c1.1,0,1.7-0.5,1.7-1.2c0-0.6-0.5-0.9-1.3-1l-1.6-0.2&#xA;&#x9;&#x9;&#x9;c-1.8-0.2-3-1.3-3-2.9c0-1.9,1.6-3.1,4-3.1c2.5,0,4,1,4.1,3.1h-2.4c0-0.8-0.7-1.1-1.8-1.1c-1,0-1.7,0.4-1.7,1.1&#xA;&#x9;&#x9;&#x9;c0,0.6,0.5,0.9,1.4,1l1.6,0.2c1.8,0.2,2.9,1.3,2.9,2.9c0,2-1.6,3.2-4.2,3.2C273.7,120.3,272.1,119.2,272,117.2z"></path>
+&#x9;&#x9;<path class="st0" d="M281.9,115.2c0-3.1,2-5.2,5-5.2c2.5,0,4.3,1.5,4.5,3.6h-2.4c-0.2-0.8-0.9-1.5-2.1-1.5c-1.5,0-2.5,1.2-2.5,3&#xA;&#x9;&#x9;&#x9;c0,1.9,1,3,2.5,3c1.1,0,1.9-0.7,2.1-1.7h2.4c-0.3,2-1.9,3.8-4.6,3.8C283.8,120.3,281.9,118.1,281.9,115.2z"></path>
+&#x9;&#x9;<path class="st0" d="M293.1,106h2.4v5c0.6-0.7,1.6-1.1,2.6-1.1c2.4,0,3.9,1.5,3.9,4.2v5.9h-2.4v-5.7c0-1.5-0.7-2.2-2-2.2&#xA;&#x9;&#x9;&#x9;c-1.3,0-2.2,0.9-2.2,2.3v5.6h-2.4V106z"></path>
+&#x9;&#x9;<path class="st0" d="M304.3,116.1v-5.9h2.4v5.7c0,1.5,0.7,2.2,1.9,2.2c1.3,0,2.1-0.9,2.1-2.3v-5.6h2.4v9.8H311v-0.9&#xA;&#x9;&#x9;&#x9;c-0.6,0.8-1.7,1.2-2.8,1.2C305.7,120.3,304.3,118.8,304.3,116.1z"></path>
+&#x9;&#x9;<path class="st0" d="M315.5,118.1V106h2.4v11.2c0,0.5,0.2,0.7,0.7,0.7h1.1v2.1h-2.1C316.2,120,315.5,119.5,315.5,118.1z"></path>
+&#x9;&#x9;<path class="st0" d="M320.6,115.1c0-3.1,2-5.1,4.8-5.1c2.9,0,4.7,1.9,4.7,5c0,0.3,0,0.7-0.1,1.1H323c0.1,1.5,1.1,2.3,2.5,2.3&#xA;&#x9;&#x9;&#x9;c1,0,1.7-0.5,2-1.2h2.4c-0.6,1.9-2.1,3.1-4.5,3.1C322.6,120.3,320.6,118.2,320.6,115.1z M327.8,114.1L327.8,114.1&#xA;&#x9;&#x9;&#x9;c0-1.3-0.9-2.2-2.3-2.2c-1.4,0-2.4,0.9-2.4,2.2H327.8z"></path>
+&#x9;&#x9;<path class="st0" d="M117.2,131h2.6l2.5,10.7l2.5-10.7h2.7l2.5,10.6l2.5-10.6h2.7l-3.6,14h-2.9l-2.6-10.6l-2.6,10.6h-2.9&#xA;&#x9;&#x9;&#x9;L117.2,131z"></path>
+&#x9;&#x9;<path class="st0" d="M136.4,141.1v-5.9h2.4v5.7c0,1.5,0.7,2.2,1.9,2.2c1.3,0,2.1-0.9,2.1-2.3v-5.6h2.4v9.8h-2.1v-0.9&#xA;&#x9;&#x9;&#x9;c-0.6,0.8-1.7,1.2-2.8,1.2C137.9,145.3,136.4,143.8,136.4,141.1z M138,131.1h2.2v2.3H138V131.1z M141.4,131.1h2.2v2.3h-2.2V131.1z&#xA;&#x9;&#x9;&#x9;"></path>
+&#x9;&#x9;<path class="st0" d="M147.7,135.2h2.1v1.7c0.2-1.1,1-1.7,2.2-1.7h1.8v2.1h-2.1c-1.2,0-1.7,0.6-1.7,1.8v5.8h-2.4V135.2z"></path>
+&#x9;&#x9;<path class="st0" d="M154.9,142.9l5.2-5.6H155v-2.1h8.3v2.1l-5.2,5.6h5.4v2.1h-8.6V142.9z"></path>
+&#x9;&#x9;<path class="st0" d="M167.5,143.8v1.2h-2.1v-14h2.4v5.2c0.6-0.8,1.7-1.3,2.9-1.3c2.8,0,4.7,2.1,4.7,5.2s-1.9,5.2-4.7,5.2&#xA;&#x9;&#x9;&#x9;C169.3,145.3,168.1,144.8,167.5,143.8z M170.4,143.1c1.5,0,2.6-1.2,2.6-3c0-1.8-1.1-3-2.6-3c-1.6,0-2.6,1.2-2.6,3&#xA;&#x9;&#x9;&#x9;C167.8,141.9,168.8,143.1,170.4,143.1z"></path>
+&#x9;&#x9;<path class="st0" d="M177.2,141.1v-5.9h2.4v5.7c0,1.5,0.7,2.2,1.9,2.2c1.3,0,2.1-0.9,2.1-2.3v-5.6h2.4v9.8h-2.1v-0.9&#xA;&#x9;&#x9;&#x9;c-0.6,0.8-1.7,1.2-2.8,1.2C178.7,145.3,177.2,143.8,177.2,141.1z"></path>
+&#x9;&#x9;<path class="st0" d="M188.5,135.2h2.1v1.7c0.2-1.1,1-1.7,2.2-1.7h1.8v2.1h-2.1c-1.2,0-1.7,0.6-1.7,1.8v5.8h-2.4V135.2z"></path>
+&#x9;&#x9;<path class="st0" d="M195.2,146.1c0-0.8,0.4-1.5,1.2-2c-0.5-0.4-0.9-0.9-0.9-1.6c0-0.8,0.5-1.6,1.6-1.9c-0.8-0.6-1.2-1.5-1.2-2.4&#xA;&#x9;&#x9;&#x9;c0-1.9,1.4-3.3,4-3.3c1.6,0,2.9,0.8,3.3,1.8v-0.3c0-1,0.6-1.2,1.2-1.2h1.4v2.1h-1.6c-0.2,0-0.4,0.1-0.4,0.4v0.7&#xA;&#x9;&#x9;&#x9;c0,2-1.6,3.3-3.8,3.3h-1.6c-0.5,0-0.8,0.2-0.8,0.6c0,0.4,0.3,0.6,0.8,0.6h3.5c2,0,3.2,1,3.2,2.6c0,1.6-0.9,2.9-3.2,2.9h-3.5&#xA;&#x9;&#x9;&#x9;C196.1,148.6,195.2,147.5,195.2,146.1z M198.6,146.8h3c0.6,0,1.1-0.3,1.1-1c0-0.5-0.4-0.8-1-0.8h-3.1c-0.8,0-1.2,0.4-1.2,0.9&#xA;&#x9;&#x9;&#x9;C197.4,146.4,197.8,146.8,198.6,146.8z M199.9,140c1.1,0,1.7-0.6,1.7-1.6c0-1-0.7-1.6-1.7-1.6s-1.7,0.6-1.7,1.6&#xA;&#x9;&#x9;&#x9;C198.2,139.4,198.8,140,199.9,140z"></path>
+&#x9;&#x9;<path class="st0" d="M206.9,137.8h6.3v2.3h-6.3V137.8z"></path>
+&#x9;&#x9;<path class="st0" d="M214.8,140.7h2.5c0,1.5,1.2,2.4,3.2,2.4c1.7,0,2.8-0.8,2.8-2.2c0-1.1-0.7-1.7-2.2-1.9l-1.7-0.2&#xA;&#x9;&#x9;&#x9;c-2.8-0.4-4.1-1.7-4.1-3.9c0-2.5,2.1-4.2,5.1-4.2c3.2,0,5.2,1.6,5.2,4.1h-2.5c-0.1-1.2-1.1-1.9-2.7-1.9c-1.6,0-2.6,0.7-2.6,1.8&#xA;&#x9;&#x9;&#x9;c0,1,0.7,1.6,2.3,1.8l1.6,0.2c2.7,0.3,4.1,1.7,4.1,4.1c0,2.8-2,4.5-5.3,4.5C217,145.3,214.9,143.6,214.8,140.7z"></path>
+&#x9;&#x9;<path class="st0" d="M227.4,140.2c0-3.1,2-5.2,5-5.2c2.5,0,4.3,1.5,4.5,3.6h-2.4c-0.2-0.8-0.9-1.5-2.1-1.5c-1.5,0-2.5,1.2-2.5,3&#xA;&#x9;&#x9;&#x9;c0,1.9,1,3,2.5,3c1.1,0,1.9-0.7,2.1-1.7h2.4c-0.3,2-1.9,3.8-4.6,3.8C229.3,145.3,227.4,143.1,227.4,140.2z"></path>
+&#x9;&#x9;<path class="st0" d="M238.7,131h2.4v5c0.6-0.7,1.6-1.1,2.6-1.1c2.4,0,3.9,1.5,3.9,4.2v5.9h-2.4v-5.7c0-1.5-0.7-2.2-2-2.2&#xA;&#x9;&#x9;&#x9;c-1.3,0-2.2,0.9-2.2,2.3v5.6h-2.4V131z"></path>
+&#x9;&#x9;<path class="st0" d="M248.7,135.2h2.5l1.9,7.1l1.9-7.1h2.7l1.9,7.1l1.9-7.1h2.5l-2.9,9.8h-2.8l-1.9-7.1l-1.9,7.1h-2.8L248.7,135.2&#xA;&#x9;&#x9;&#x9;z"></path>
+&#x9;&#x9;<path class="st0" d="M264.7,140.1c0-3.1,2-5.1,4.8-5.1c2.9,0,4.7,1.9,4.7,5c0,0.3,0,0.7-0.1,1.1h-7.1c0.1,1.5,1.1,2.3,2.5,2.3&#xA;&#x9;&#x9;&#x9;c1,0,1.7-0.5,2-1.2h2.4c-0.6,1.9-2.1,3.1-4.5,3.1C266.7,145.3,264.7,143.2,264.7,140.1z M271.8,139.1L271.8,139.1&#xA;&#x9;&#x9;&#x9;c0-1.3-0.9-2.2-2.3-2.2c-1.4,0-2.4,0.9-2.4,2.2H271.8z"></path>
+&#x9;&#x9;<path class="st0" d="M276.1,131.1h2.6v2.4h-2.6V131.1z M276.2,135.2h2.4v9.8h-2.4V135.2z"></path>
+&#x9;&#x9;<path class="st0" d="M281.1,135.2h2.1v1.1c0.6-1,1.7-1.4,2.9-1.4c2.4,0,3.9,1.5,3.9,4.2v5.9h-2.4v-5.7c0-1.5-0.7-2.2-2-2.2&#xA;&#x9;&#x9;&#x9;c-1.3,0-2.2,0.9-2.2,2.3v5.6h-2.4V135.2z"></path>
+&#x9;&#x9;<path class="st0" d="M296.5,131h3.3v2.1h-2.7c-0.6,0-1,0.3-1,0.9v1.2h3.1v2.1h-3.1v7.7h-2.4v-7.7h-2.5v-2.1h2.5v-1.5&#xA;&#x9;&#x9;&#x9;C293.7,132,294.8,131,296.5,131z"></path>
+&#x9;&#x9;<path class="st0" d="M300.6,141.1v-5.9h2.4v5.7c0,1.5,0.7,2.2,1.9,2.2c1.3,0,2.1-0.9,2.1-2.3v-5.6h2.4v9.8h-2.1v-0.9&#xA;&#x9;&#x9;&#x9;c-0.6,0.8-1.7,1.2-2.8,1.2C302.1,145.3,300.6,143.8,300.6,141.1z"></path>
+&#x9;&#x9;<path class="st0" d="M311.9,135.2h2.1v1.7c0.2-1.1,1-1.7,2.2-1.7h1.8v2.1h-2.1c-1.2,0-1.7,0.6-1.7,1.8v5.8h-2.4V135.2z"></path>
+&#x9;&#x9;<path class="st0" d="M321.3,142.5v-5.2h-2.5v-2.1h2.5v-2.9h2.4v2.9h3v2.1h-3v4.6c0,0.6,0.2,0.9,0.9,0.9h2.1v2.1h-2.9&#xA;&#x9;&#x9;&#x9;C322.1,145,321.3,144.3,321.3,142.5z"></path>
+&#x9;</g>
+&#x9;<g>
+&#x9;&#x9;<path class="st0" d="M123.1,75.1V54.4h-10V46h10V34.5h9.5V46h11.9v8.4h-11.9v18.6c0,2.6,1,3.7,3.7,3.7h8.2V85h-11.4&#xA;&#x9;&#x9;&#x9;C126.3,85,123.1,82.2,123.1,75.1z"></path>
+&#x9;&#x9;<path class="st0" d="M151.7,29h9.5v20c2.5-2.8,6.2-4.2,10.6-4.2c9.6,0,15.5,6.1,15.5,16.6V85h-9.5V62.4c0-6.1-2.9-9-7.9-9&#xA;&#x9;&#x9;&#x9;c-5.2,0-8.6,3.7-8.6,9.3V85h-9.5V29z"></path>
+&#x9;&#x9;<path class="st0" d="M192.1,46h9.9l7.6,28.4l7.6-28.4h11l7.6,28.4l7.6-28.4h9.9l-11.7,39h-11.3l-7.6-28.3L215.1,85h-11.3L192.1,46&#xA;&#x9;&#x9;&#x9;z"></path>
+&#x9;&#x9;<path class="st0" d="M256.3,73.6h9.8c0.3,3.3,3.1,4.9,7.9,4.9c4.3,0,7-1.8,7-4.7c0-2.5-1.9-3.8-5.4-4.1l-6.2-0.6&#xA;&#x9;&#x9;&#x9;c-7.3-0.8-11.8-5.1-11.8-11.8c0-7.8,6.2-12.6,16.2-12.6c9.8,0,16.1,4.2,16.6,12.3h-9.5c-0.2-3.1-2.9-4.6-7.2-4.6&#xA;&#x9;&#x9;&#x9;c-4.1,0-6.6,1.6-6.6,4.3c0,2.3,1.8,3.6,5.8,4.1l6.3,0.7c7.4,0.9,11.6,5.2,11.6,11.7c0,7.8-6.5,12.9-16.9,12.9&#xA;&#x9;&#x9;&#x9;C263.1,86.2,256.7,81.9,256.3,73.6z"></path>
+&#x9;</g>
+</g></svg>
+      <div class="meta">Bilanzierung I · <b>WS 25/26</b></div>
+    </div>
+
+    <div class="page-body">
+      <div class="masthead">
+        <div class="mh-eyebrow">Übungsblatt <span class="nr">· Nr. 03</span></div>
+        <h1 class="mh-title">Bilanzierung &amp; Bewertung</h1>
+        <p class="mh-sub">Aufgaben zur Bilanz, GuV und zum Vorsichtsprinzip nach HGB</p>
+        <div class="mh-rule"></div>
+        <div class="mh-meta">
+          <div><div class="k">Modul</div><div class="v">Externes Rechnungswesen</div></div>
+          <div><div class="k">Dozent</div><div class="v">Prof. Dr. C. Kraus</div></div>
+          <div><div class="k">Ausgabe</div><div class="v">16.06.2026</div></div>
+          <div><div class="k">Bearbeitungszeit</div><div class="v accent">90 Min.</div></div>
+          <div><div class="k">Punkte gesamt</div><div class="v accent">20</div></div>
+        </div>
+      </div>
+
+      <!-- Aufgabe 1 -->
+      <div class="aufgabe">
+        <div class="badge">1</div>
+        <div class="head">
+          <div class="kicker">Aufgabe</div>
+          <h2>Aktiva und Passiva zuordnen</h2>
+        </div>
+        <div class="points">8 Punkte</div>
+      </div>
+      <div class="body">
+        <p>Ordnen Sie die folgenden Bilanzpositionen der Aktiv- bzw. Passivseite zu und begründen Sie kurz Ihre Entscheidung.</p>
+        <ol class="sub">
+          <li>Maschinen und technische Anlagen</li>
+          <li>Verbindlichkeiten gegenüber Kreditinstituten</li>
+          <li>Forderungen aus Lieferungen und Leistungen</li>
+          <li>Gezeichnetes Kapital</li>
+        </ol>
+      </div>
+      <div class="loesung">
+        <div class="inner">
+          <div class="eyebrow"><span class="key">✓</span>Lösung</div>
+          <p><strong>Aktiva:</strong> Maschinen (Anlagevermögen), Forderungen aus L&amp;L (Umlaufvermögen). <strong>Passiva:</strong> Verbindlichkeiten gegenüber Kreditinstituten (Fremdkapital), gezeichnetes Kapital (Eigenkapital).</p>
+          <p>Die Aktivseite zeigt die <strong>Mittelverwendung</strong>, die Passivseite die <strong>Mittelherkunft</strong> — beide Seiten sind stets gleich groß.</p>
+        </div>
+      </div>
+
+      <!-- Aufgabe 2 -->
+      <div class="aufgabe">
+        <div class="badge">2</div>
+        <div class="head">
+          <div class="kicker">Aufgabe</div>
+          <h2>Begriffe vervollständigen</h2>
+        </div>
+        <div class="points">4 Punkte</div>
+      </div>
+      <div class="body">
+        <p>Ergänzen Sie die fehlenden Begriffe.</p>
+      </div>
+      <div class="box gaps">
+        <div class="inner">
+          <div class="box-eyebrow"><span class="glyph"></span>Übung · Begriffe</div>
+          <div class="box-body"><p>Die <span class="gap">Bilanz</span> ist eine <span class="gap">Zeitpunktrechnung</span>, die GuV hingegen eine <span class="gap">Zeitraumrechnung</span>. Beide bilden zusammen den Kern des <span class="gap">Jahresabschlusses</span>.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="run-foot">
+      <div class="rule"></div>
+      <div class="row">
+        <div class="left"><b>Fakultät Wirtschaftsingenieurwesen</b><span class="sep">|</span>Prof. Dr. Christian Kraus</div>
+        <div>16.06.2026</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PAGE 2 ===================== -->
+  <section class="sheet" data-screen-label="Übungsblatt — Seite 2">
+    <div class="run-head">
+      <svg class="logo" viewBox="0 0 358.1 175"><g>
+&#x9;<g>
+&#x9;&#x9;<path class="st0" d="M35,52.5h2.6c1.1,0,2-0.9,2-2v-9.1c0-1.1,0.9-2,2-2h15.6c1.1,0,2-0.9,2-2v-2.6c0-1.1-0.9-2-2-2H41.5&#xA;&#x9;&#x9;&#x9;c-1.1,0-2,0.9-2,2v2.6c0,1.1-0.9,2-2,2H35c-1.1,0-2,0.9-2,2v9.1C33,51.6,33.9,52.5,35,52.5z"></path>
+&#x9;&#x9;<path class="st0" d="M83.1,19.9H67.5c-1.1,0-2,0.9-2,2v2.6c0,1.1,0.9,2,2,2h15.6c1.1,0,2-0.9,2-2v-2.6&#xA;&#x9;&#x9;&#x9;C85.1,20.8,84.2,19.9,83.1,19.9z"></path>
+&#x9;&#x9;<path class="st0" d="M96.1,32.9h-2.6c-1.1,0-2,0.9-2,2V44c0,1.1,0.9,2,2,2h2.6c1.1,0,2-0.9,2-2v-9.1&#xA;&#x9;&#x9;&#x9;C98.1,33.8,97.2,32.9,96.1,32.9z"></path>
+&#x9;&#x9;<path class="st0" d="M96.1,52.5h-2.6c-1.1,0-2,0.9-2,2V57c0,1.1,0.9,2,2,2h2.6c1.1,0,2-0.9,2-2v-2.6&#xA;&#x9;&#x9;&#x9;C98.1,53.3,97.2,52.5,96.1,52.5z"></path>
+&#x9;&#x9;<path class="st0" d="M72.1,54.4c0-1.1-0.9-2-2-2h-2.6c-1.1,0-2,0.9-2,2v22.1c0,1.1-0.9,2-2,2h-9.1c-1.1,0-2-0.9-2-2V54.4&#xA;&#x9;&#x9;&#x9;c0-1.1,0.9-2,2-2h2.6c1.1,0,2-0.9,2-2v-2.6c0-1.1-0.9-2-2-2h-2.6c-1.1,0-2,0.9-2,2v2.6c0,1.1-0.9,2-2,2H48c-1.1,0-2,0.9-2,2V83&#xA;&#x9;&#x9;&#x9;c0,1.1,0.9,2,2,2h15.6c1.1,0,2-0.9,2-2v-2.6c0-1.1,0.9-2,2-2h2.6c1.1,0,2-0.9,2-2V54.4z"></path>
+&#x9;&#x9;<path class="st0" d="M83.1,32.9H67.5c-1.1,0-2,0.9-2,2v2.6c0,1.1,0.9,2,2,2h9.1c1.1,0,2,0.9,2,2V57c0,1.1,0.9,2,2,2h2.6&#xA;&#x9;&#x9;&#x9;c1.1,0,2-0.9,2-2V34.9C85.1,33.8,84.2,32.9,83.1,32.9z"></path>
+&#x9;&#x9;<path class="st0" d="M83.1,65.5h-2.6c-1.1,0-2,0.9-2,2v22.1c0,1.1-0.9,2-2,2H74c-1.1,0-2,0.9-2,2v2.6c0,1.1,0.9,2,2,2h2.6&#xA;&#x9;&#x9;&#x9;c1.1,0,2-0.9,2-2v-2.6c0-1.1,0.9-2,2-2h2.6c1.1,0,2-0.9,2-2V67.4C85.1,66.4,84.2,65.5,83.1,65.5z"></path>
+&#x9;&#x9;<path class="st0" d="M63.6,91.5H41.5c-1.1,0-2-0.9-2-2V67.4c0-1.1-0.9-2-2-2H35c-1.1,0-2,0.9-2,2v22.1c0,1.1,0.9,2,2,2h2.6&#xA;&#x9;&#x9;&#x9;c1.1,0,2,0.9,2,2v2.6c0,1.1,0.9,2,2,2h22.1c1.1,0,2-0.9,2-2v-2.6C65.5,92.4,64.7,91.5,63.6,91.5z"></path>
+&#x9;&#x9;<path class="st0" d="M50.6,104.5H35c-1.1,0-2,0.9-2,2v2.6c0,1.1,0.9,2,2,2h15.6c1.1,0,2-0.9,2-2v-2.6&#xA;&#x9;&#x9;&#x9;C52.5,105.4,51.7,104.5,50.6,104.5z"></path>
+&#x9;&#x9;<path class="st0" d="M24.6,78.5H22c-1.1,0-2,0.9-2,2v9.1c0,1.1,0.9,2,2,2h2.6c1.1,0,2-0.9,2-2v-9.1C26.5,79.4,25.6,78.5,24.6,78.5&#xA;&#x9;&#x9;&#x9;z"></path>
+&#x9;</g>
+&#x9;<g>
+&#x9;&#x9;<path class="st0" d="M121.4,108.3H117V106h11.1v2.3h-4.3V120h-2.5V108.3z"></path>
+&#x9;&#x9;<path class="st0" d="M127.4,115.1c0-3.1,2-5.1,4.8-5.1c2.9,0,4.7,1.9,4.7,5c0,0.3,0,0.7-0.1,1.1h-7.1c0.1,1.5,1.1,2.3,2.5,2.3&#xA;&#x9;&#x9;&#x9;c1,0,1.7-0.5,2-1.2h2.4c-0.6,1.9-2.1,3.1-4.5,3.1C129.4,120.3,127.4,118.2,127.4,115.1z M134.6,114.1L134.6,114.1&#xA;&#x9;&#x9;&#x9;c0-1.3-0.9-2.2-2.3-2.2c-1.4,0-2.4,0.9-2.4,2.2H134.6z"></path>
+&#x9;&#x9;<path class="st0" d="M138.4,115.2c0-3.1,2-5.2,5-5.2c2.5,0,4.3,1.5,4.5,3.6h-2.4c-0.2-0.8-0.9-1.5-2.1-1.5c-1.5,0-2.5,1.2-2.5,3&#xA;&#x9;&#x9;&#x9;c0,1.9,1,3,2.5,3c1.1,0,1.9-0.7,2.1-1.7h2.4c-0.3,2-1.9,3.8-4.6,3.8C140.2,120.3,138.4,118.1,138.4,115.2z"></path>
+&#x9;&#x9;<path class="st0" d="M149.6,106h2.4v5c0.6-0.7,1.6-1.1,2.6-1.1c2.4,0,3.9,1.5,3.9,4.2v5.9h-2.4v-5.7c0-1.5-0.7-2.2-2-2.2&#xA;&#x9;&#x9;&#x9;c-1.3,0-2.2,0.9-2.2,2.3v5.6h-2.4V106z"></path>
+&#x9;&#x9;<path class="st0" d="M161,110.2h2.1v1.1c0.6-1,1.7-1.4,2.9-1.4c2.4,0,3.9,1.5,3.9,4.2v5.9h-2.4v-5.7c0-1.5-0.7-2.2-2-2.2&#xA;&#x9;&#x9;&#x9;c-1.3,0-2.2,0.9-2.2,2.3v5.6H161V110.2z"></path>
+&#x9;&#x9;<path class="st0" d="M172.2,106.1h2.6v2.4h-2.6V106.1z M172.3,110.2h2.4v9.8h-2.4V110.2z"></path>
+&#x9;&#x9;<path class="st0" d="M176.5,117.2h2.5c0.1,0.8,0.8,1.2,2,1.2c1.1,0,1.7-0.5,1.7-1.2c0-0.6-0.5-0.9-1.3-1l-1.6-0.2&#xA;&#x9;&#x9;&#x9;c-1.8-0.2-3-1.3-3-2.9c0-1.9,1.6-3.1,4-3.1c2.5,0,4,1,4.1,3.1h-2.4c0-0.8-0.7-1.1-1.8-1.1c-1,0-1.7,0.4-1.7,1.1&#xA;&#x9;&#x9;&#x9;c0,0.6,0.5,0.9,1.4,1l1.6,0.2c1.8,0.2,2.9,1.3,2.9,2.9c0,2-1.6,3.2-4.2,3.2C178.2,120.3,176.6,119.2,176.5,117.2z"></path>
+&#x9;&#x9;<path class="st0" d="M186.4,115.2c0-3.1,2-5.2,5-5.2c2.5,0,4.3,1.5,4.5,3.6h-2.4c-0.2-0.8-0.9-1.5-2.1-1.5c-1.5,0-2.5,1.2-2.5,3&#xA;&#x9;&#x9;&#x9;c0,1.9,1,3,2.5,3c1.1,0,1.9-0.7,2.1-1.7h2.4c-0.3,2-1.9,3.8-4.6,3.8C188.2,120.3,186.4,118.1,186.4,115.2z"></path>
+&#x9;&#x9;<path class="st0" d="M197.6,106h2.4v5c0.6-0.7,1.6-1.1,2.6-1.1c2.4,0,3.9,1.5,3.9,4.2v5.9h-2.4v-5.7c0-1.5-0.7-2.2-2-2.2&#xA;&#x9;&#x9;&#x9;c-1.3,0-2.2,0.9-2.2,2.3v5.6h-2.4V106z"></path>
+&#x9;&#x9;<path class="st0" d="M208.4,115.1c0-3.1,2-5.1,4.8-5.1c2.9,0,4.7,1.9,4.7,5c0,0.3,0,0.7-0.1,1.1h-7.1c0.1,1.5,1.1,2.3,2.5,2.3&#xA;&#x9;&#x9;&#x9;c1,0,1.7-0.5,2-1.2h2.4c-0.6,1.9-2.1,3.1-4.5,3.1C210.3,120.3,208.4,118.2,208.4,115.1z M215.5,114.1L215.5,114.1&#xA;&#x9;&#x9;&#x9;c0-1.3-0.9-2.2-2.3-2.2c-1.4,0-2.4,0.9-2.4,2.2H215.5z"></path>
+&#x9;&#x9;<path class="st0" d="M233.8,113.8h-6.3v6.2H225v-14h2.5v5.5h6.3V106h2.5v14h-2.5V113.8z"></path>
+&#x9;&#x9;<path class="st0" d="M238.5,115.1c0-3.1,2.1-5.2,5.1-5.2c3,0,5.1,2.1,5.1,5.2s-2.1,5.2-5.1,5.2&#xA;&#x9;&#x9;&#x9;C240.6,120.3,238.5,118.2,238.5,115.1z M243.6,118.1c1.6,0,2.6-1.2,2.6-3c0-1.8-1.1-3-2.6-3c-1.6,0-2.6,1.2-2.6,3&#xA;&#x9;&#x9;&#x9;C241,116.9,242,118.1,243.6,118.1z"></path>
+&#x9;&#x9;<path class="st0" d="M250.1,115.2c0-3.1,2-5.2,5-5.2c2.5,0,4.3,1.5,4.5,3.6h-2.4c-0.2-0.8-0.9-1.5-2.1-1.5c-1.5,0-2.5,1.2-2.5,3&#xA;&#x9;&#x9;&#x9;c0,1.9,1,3,2.5,3c1.1,0,1.9-0.7,2.1-1.7h2.4c-0.3,2-1.9,3.8-4.6,3.8C252,120.3,250.1,118.1,250.1,115.2z"></path>
+&#x9;&#x9;<path class="st0" d="M261.4,106h2.4v5c0.6-0.7,1.6-1.1,2.6-1.1c2.4,0,3.9,1.5,3.9,4.2v5.9h-2.4v-5.7c0-1.5-0.7-2.2-2-2.2&#xA;&#x9;&#x9;&#x9;c-1.3,0-2.2,0.9-2.2,2.3v5.6h-2.4V106z"></path>
+&#x9;&#x9;<path class="st0" d="M272,117.2h2.5c0.1,0.8,0.8,1.2,2,1.2c1.1,0,1.7-0.5,1.7-1.2c0-0.6-0.5-0.9-1.3-1l-1.6-0.2&#xA;&#x9;&#x9;&#x9;c-1.8-0.2-3-1.3-3-2.9c0-1.9,1.6-3.1,4-3.1c2.5,0,4,1,4.1,3.1h-2.4c0-0.8-0.7-1.1-1.8-1.1c-1,0-1.7,0.4-1.7,1.1&#xA;&#x9;&#x9;&#x9;c0,0.6,0.5,0.9,1.4,1l1.6,0.2c1.8,0.2,2.9,1.3,2.9,2.9c0,2-1.6,3.2-4.2,3.2C273.7,120.3,272.1,119.2,272,117.2z"></path>
+&#x9;&#x9;<path class="st0" d="M281.9,115.2c0-3.1,2-5.2,5-5.2c2.5,0,4.3,1.5,4.5,3.6h-2.4c-0.2-0.8-0.9-1.5-2.1-1.5c-1.5,0-2.5,1.2-2.5,3&#xA;&#x9;&#x9;&#x9;c0,1.9,1,3,2.5,3c1.1,0,1.9-0.7,2.1-1.7h2.4c-0.3,2-1.9,3.8-4.6,3.8C283.8,120.3,281.9,118.1,281.9,115.2z"></path>
+&#x9;&#x9;<path class="st0" d="M293.1,106h2.4v5c0.6-0.7,1.6-1.1,2.6-1.1c2.4,0,3.9,1.5,3.9,4.2v5.9h-2.4v-5.7c0-1.5-0.7-2.2-2-2.2&#xA;&#x9;&#x9;&#x9;c-1.3,0-2.2,0.9-2.2,2.3v5.6h-2.4V106z"></path>
+&#x9;&#x9;<path class="st0" d="M304.3,116.1v-5.9h2.4v5.7c0,1.5,0.7,2.2,1.9,2.2c1.3,0,2.1-0.9,2.1-2.3v-5.6h2.4v9.8H311v-0.9&#xA;&#x9;&#x9;&#x9;c-0.6,0.8-1.7,1.2-2.8,1.2C305.7,120.3,304.3,118.8,304.3,116.1z"></path>
+&#x9;&#x9;<path class="st0" d="M315.5,118.1V106h2.4v11.2c0,0.5,0.2,0.7,0.7,0.7h1.1v2.1h-2.1C316.2,120,315.5,119.5,315.5,118.1z"></path>
+&#x9;&#x9;<path class="st0" d="M320.6,115.1c0-3.1,2-5.1,4.8-5.1c2.9,0,4.7,1.9,4.7,5c0,0.3,0,0.7-0.1,1.1H323c0.1,1.5,1.1,2.3,2.5,2.3&#xA;&#x9;&#x9;&#x9;c1,0,1.7-0.5,2-1.2h2.4c-0.6,1.9-2.1,3.1-4.5,3.1C322.6,120.3,320.6,118.2,320.6,115.1z M327.8,114.1L327.8,114.1&#xA;&#x9;&#x9;&#x9;c0-1.3-0.9-2.2-2.3-2.2c-1.4,0-2.4,0.9-2.4,2.2H327.8z"></path>
+&#x9;&#x9;<path class="st0" d="M117.2,131h2.6l2.5,10.7l2.5-10.7h2.7l2.5,10.6l2.5-10.6h2.7l-3.6,14h-2.9l-2.6-10.6l-2.6,10.6h-2.9&#xA;&#x9;&#x9;&#x9;L117.2,131z"></path>
+&#x9;&#x9;<path class="st0" d="M136.4,141.1v-5.9h2.4v5.7c0,1.5,0.7,2.2,1.9,2.2c1.3,0,2.1-0.9,2.1-2.3v-5.6h2.4v9.8h-2.1v-0.9&#xA;&#x9;&#x9;&#x9;c-0.6,0.8-1.7,1.2-2.8,1.2C137.9,145.3,136.4,143.8,136.4,141.1z M138,131.1h2.2v2.3H138V131.1z M141.4,131.1h2.2v2.3h-2.2V131.1z&#xA;&#x9;&#x9;&#x9;"></path>
+&#x9;&#x9;<path class="st0" d="M147.7,135.2h2.1v1.7c0.2-1.1,1-1.7,2.2-1.7h1.8v2.1h-2.1c-1.2,0-1.7,0.6-1.7,1.8v5.8h-2.4V135.2z"></path>
+&#x9;&#x9;<path class="st0" d="M154.9,142.9l5.2-5.6H155v-2.1h8.3v2.1l-5.2,5.6h5.4v2.1h-8.6V142.9z"></path>
+&#x9;&#x9;<path class="st0" d="M167.5,143.8v1.2h-2.1v-14h2.4v5.2c0.6-0.8,1.7-1.3,2.9-1.3c2.8,0,4.7,2.1,4.7,5.2s-1.9,5.2-4.7,5.2&#xA;&#x9;&#x9;&#x9;C169.3,145.3,168.1,144.8,167.5,143.8z M170.4,143.1c1.5,0,2.6-1.2,2.6-3c0-1.8-1.1-3-2.6-3c-1.6,0-2.6,1.2-2.6,3&#xA;&#x9;&#x9;&#x9;C167.8,141.9,168.8,143.1,170.4,143.1z"></path>
+&#x9;&#x9;<path class="st0" d="M177.2,141.1v-5.9h2.4v5.7c0,1.5,0.7,2.2,1.9,2.2c1.3,0,2.1-0.9,2.1-2.3v-5.6h2.4v9.8h-2.1v-0.9&#xA;&#x9;&#x9;&#x9;c-0.6,0.8-1.7,1.2-2.8,1.2C178.7,145.3,177.2,143.8,177.2,141.1z"></path>
+&#x9;&#x9;<path class="st0" d="M188.5,135.2h2.1v1.7c0.2-1.1,1-1.7,2.2-1.7h1.8v2.1h-2.1c-1.2,0-1.7,0.6-1.7,1.8v5.8h-2.4V135.2z"></path>
+&#x9;&#x9;<path class="st0" d="M195.2,146.1c0-0.8,0.4-1.5,1.2-2c-0.5-0.4-0.9-0.9-0.9-1.6c0-0.8,0.5-1.6,1.6-1.9c-0.8-0.6-1.2-1.5-1.2-2.4&#xA;&#x9;&#x9;&#x9;c0-1.9,1.4-3.3,4-3.3c1.6,0,2.9,0.8,3.3,1.8v-0.3c0-1,0.6-1.2,1.2-1.2h1.4v2.1h-1.6c-0.2,0-0.4,0.1-0.4,0.4v0.7&#xA;&#x9;&#x9;&#x9;c0,2-1.6,3.3-3.8,3.3h-1.6c-0.5,0-0.8,0.2-0.8,0.6c0,0.4,0.3,0.6,0.8,0.6h3.5c2,0,3.2,1,3.2,2.6c0,1.6-0.9,2.9-3.2,2.9h-3.5&#xA;&#x9;&#x9;&#x9;C196.1,148.6,195.2,147.5,195.2,146.1z M198.6,146.8h3c0.6,0,1.1-0.3,1.1-1c0-0.5-0.4-0.8-1-0.8h-3.1c-0.8,0-1.2,0.4-1.2,0.9&#xA;&#x9;&#x9;&#x9;C197.4,146.4,197.8,146.8,198.6,146.8z M199.9,140c1.1,0,1.7-0.6,1.7-1.6c0-1-0.7-1.6-1.7-1.6s-1.7,0.6-1.7,1.6&#xA;&#x9;&#x9;&#x9;C198.2,139.4,198.8,140,199.9,140z"></path>
+&#x9;&#x9;<path class="st0" d="M206.9,137.8h6.3v2.3h-6.3V137.8z"></path>
+&#x9;&#x9;<path class="st0" d="M214.8,140.7h2.5c0,1.5,1.2,2.4,3.2,2.4c1.7,0,2.8-0.8,2.8-2.2c0-1.1-0.7-1.7-2.2-1.9l-1.7-0.2&#xA;&#x9;&#x9;&#x9;c-2.8-0.4-4.1-1.7-4.1-3.9c0-2.5,2.1-4.2,5.1-4.2c3.2,0,5.2,1.6,5.2,4.1h-2.5c-0.1-1.2-1.1-1.9-2.7-1.9c-1.6,0-2.6,0.7-2.6,1.8&#xA;&#x9;&#x9;&#x9;c0,1,0.7,1.6,2.3,1.8l1.6,0.2c2.7,0.3,4.1,1.7,4.1,4.1c0,2.8-2,4.5-5.3,4.5C217,145.3,214.9,143.6,214.8,140.7z"></path>
+&#x9;&#x9;<path class="st0" d="M227.4,140.2c0-3.1,2-5.2,5-5.2c2.5,0,4.3,1.5,4.5,3.6h-2.4c-0.2-0.8-0.9-1.5-2.1-1.5c-1.5,0-2.5,1.2-2.5,3&#xA;&#x9;&#x9;&#x9;c0,1.9,1,3,2.5,3c1.1,0,1.9-0.7,2.1-1.7h2.4c-0.3,2-1.9,3.8-4.6,3.8C229.3,145.3,227.4,143.1,227.4,140.2z"></path>
+&#x9;&#x9;<path class="st0" d="M238.7,131h2.4v5c0.6-0.7,1.6-1.1,2.6-1.1c2.4,0,3.9,1.5,3.9,4.2v5.9h-2.4v-5.7c0-1.5-0.7-2.2-2-2.2&#xA;&#x9;&#x9;&#x9;c-1.3,0-2.2,0.9-2.2,2.3v5.6h-2.4V131z"></path>
+&#x9;&#x9;<path class="st0" d="M248.7,135.2h2.5l1.9,7.1l1.9-7.1h2.7l1.9,7.1l1.9-7.1h2.5l-2.9,9.8h-2.8l-1.9-7.1l-1.9,7.1h-2.8L248.7,135.2&#xA;&#x9;&#x9;&#x9;z"></path>
+&#x9;&#x9;<path class="st0" d="M264.7,140.1c0-3.1,2-5.1,4.8-5.1c2.9,0,4.7,1.9,4.7,5c0,0.3,0,0.7-0.1,1.1h-7.1c0.1,1.5,1.1,2.3,2.5,2.3&#xA;&#x9;&#x9;&#x9;c1,0,1.7-0.5,2-1.2h2.4c-0.6,1.9-2.1,3.1-4.5,3.1C266.7,145.3,264.7,143.2,264.7,140.1z M271.8,139.1L271.8,139.1&#xA;&#x9;&#x9;&#x9;c0-1.3-0.9-2.2-2.3-2.2c-1.4,0-2.4,0.9-2.4,2.2H271.8z"></path>
+&#x9;&#x9;<path class="st0" d="M276.1,131.1h2.6v2.4h-2.6V131.1z M276.2,135.2h2.4v9.8h-2.4V135.2z"></path>
+&#x9;&#x9;<path class="st0" d="M281.1,135.2h2.1v1.1c0.6-1,1.7-1.4,2.9-1.4c2.4,0,3.9,1.5,3.9,4.2v5.9h-2.4v-5.7c0-1.5-0.7-2.2-2-2.2&#xA;&#x9;&#x9;&#x9;c-1.3,0-2.2,0.9-2.2,2.3v5.6h-2.4V135.2z"></path>
+&#x9;&#x9;<path class="st0" d="M296.5,131h3.3v2.1h-2.7c-0.6,0-1,0.3-1,0.9v1.2h3.1v2.1h-3.1v7.7h-2.4v-7.7h-2.5v-2.1h2.5v-1.5&#xA;&#x9;&#x9;&#x9;C293.7,132,294.8,131,296.5,131z"></path>
+&#x9;&#x9;<path class="st0" d="M300.6,141.1v-5.9h2.4v5.7c0,1.5,0.7,2.2,1.9,2.2c1.3,0,2.1-0.9,2.1-2.3v-5.6h2.4v9.8h-2.1v-0.9&#xA;&#x9;&#x9;&#x9;c-0.6,0.8-1.7,1.2-2.8,1.2C302.1,145.3,300.6,143.8,300.6,141.1z"></path>
+&#x9;&#x9;<path class="st0" d="M311.9,135.2h2.1v1.7c0.2-1.1,1-1.7,2.2-1.7h1.8v2.1h-2.1c-1.2,0-1.7,0.6-1.7,1.8v5.8h-2.4V135.2z"></path>
+&#x9;&#x9;<path class="st0" d="M321.3,142.5v-5.2h-2.5v-2.1h2.5v-2.9h2.4v2.9h3v2.1h-3v4.6c0,0.6,0.2,0.9,0.9,0.9h2.1v2.1h-2.9&#xA;&#x9;&#x9;&#x9;C322.1,145,321.3,144.3,321.3,142.5z"></path>
+&#x9;</g>
+&#x9;<g>
+&#x9;&#x9;<path class="st0" d="M123.1,75.1V54.4h-10V46h10V34.5h9.5V46h11.9v8.4h-11.9v18.6c0,2.6,1,3.7,3.7,3.7h8.2V85h-11.4&#xA;&#x9;&#x9;&#x9;C126.3,85,123.1,82.2,123.1,75.1z"></path>
+&#x9;&#x9;<path class="st0" d="M151.7,29h9.5v20c2.5-2.8,6.2-4.2,10.6-4.2c9.6,0,15.5,6.1,15.5,16.6V85h-9.5V62.4c0-6.1-2.9-9-7.9-9&#xA;&#x9;&#x9;&#x9;c-5.2,0-8.6,3.7-8.6,9.3V85h-9.5V29z"></path>
+&#x9;&#x9;<path class="st0" d="M192.1,46h9.9l7.6,28.4l7.6-28.4h11l7.6,28.4l7.6-28.4h9.9l-11.7,39h-11.3l-7.6-28.3L215.1,85h-11.3L192.1,46&#xA;&#x9;&#x9;&#x9;z"></path>
+&#x9;&#x9;<path class="st0" d="M256.3,73.6h9.8c0.3,3.3,3.1,4.9,7.9,4.9c4.3,0,7-1.8,7-4.7c0-2.5-1.9-3.8-5.4-4.1l-6.2-0.6&#xA;&#x9;&#x9;&#x9;c-7.3-0.8-11.8-5.1-11.8-11.8c0-7.8,6.2-12.6,16.2-12.6c9.8,0,16.1,4.2,16.6,12.3h-9.5c-0.2-3.1-2.9-4.6-7.2-4.6&#xA;&#x9;&#x9;&#x9;c-4.1,0-6.6,1.6-6.6,4.3c0,2.3,1.8,3.6,5.8,4.1l6.3,0.7c7.4,0.9,11.6,5.2,11.6,11.7c0,7.8-6.5,12.9-16.9,12.9&#xA;&#x9;&#x9;&#x9;C263.1,86.2,256.7,81.9,256.3,73.6z"></path>
+&#x9;</g>
+</g></svg>
+      <div class="meta">Bilanzierung I · <b>WS 25/26</b></div>
+    </div>
+
+    <div class="page-body">
+      <!-- Aufgabe 3 -->
+      <div class="aufgabe" style="margin-top:8px;">
+        <div class="badge">3</div>
+        <div class="head">
+          <div class="kicker">Aufgabe · Fallstudie</div>
+          <h2>Der Fall Müller GmbH</h2>
+        </div>
+        <div class="points">5 Punkte</div>
+      </div>
+      <div class="body">
+        <p>Herr Müller hat zum Bilanzstichtag vergessen, eine Rückstellung für einen schwebenden Rechtsstreit zu bilden. Der Ausgang ist ungewiss, ein Verlust jedoch wahrscheinlich. Beurteilen Sie den Sachverhalt und nennen Sie die einschlägige Rechtsgrundlage.</p>
+      </div>
+      <div class="loesung">
+        <div class="inner">
+          <div class="eyebrow"><span class="key">✓</span>Lösung</div>
+          <p>Nach <strong>§ 249 HGB</strong> besteht für ungewisse Verbindlichkeiten eine <strong>Passivierungspflicht</strong>. Die fehlende Rückstellung verstößt gegen das Vorsichtsprinzip und führt zu einem überhöhten Jahresüberschuss.</p>
+        </div>
+      </div>
+
+      <!-- Aufgabe 4 -->
+      <div class="aufgabe">
+        <div class="badge">4</div>
+        <div class="head">
+          <div class="kicker">Aufgabe · Quick-Check</div>
+          <h2>Bewertungsprinzip erkennen</h2>
+        </div>
+        <div class="points">3 Punkte</div>
+      </div>
+      <div class="box quiz">
+        <div class="inner">
+          <div class="box-eyebrow"><span class="glyph"></span>Quick-Check</div>
+          <p class="q">Welches Prinzip prägt die Bewertung im HGB?</p>
+          <ul>
+            <li><span class="cb"></span><span>Fair-Value-Prinzip</span></li>
+            <li class="correct"><span class="cb"></span><span>Vorsichtsprinzip</span></li>
+            <li><span class="cb"></span><span>Matching Principle</span></li>
+          </ul>
+          <div class="fb">Das HGB dient primär dem Gläubigerschutz — daher wird im Zweifel vorsichtig bewertet.</div>
+        </div>
+      </div>
+
+      <div class="box hinweis">
+        <div class="inner">
+          <div class="box-eyebrow"><span class="glyph">i</span>Hinweis</div>
+          <div class="box-body"><p>Für die Gliederung der Bilanz ist <strong>§ 266 HGB</strong> maßgeblich. Nutzen Sie das Schema als Orientierung bei der Zuordnung.</p></div>
+        </div>
+      </div>
+
+      <table class="tbl">
+        <thead><tr><th>Position</th><th>Zuordnung</th><th>Punkte</th></tr></thead>
+        <tbody>
+          <tr><td>Maschinen</td><td>Anlagevermögen</td><td>2</td></tr>
+          <tr><td>Forderungen L&amp;L</td><td>Umlaufvermögen</td><td>2</td></tr>
+          <tr><td>Gezeichnetes Kapital</td><td>Eigenkapital</td><td>2</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="run-foot simple">
+      <div class="rule"></div>
+      <div class="pgc">2</div>
+    </div>
+  </section>
+
+</body>
+</html>

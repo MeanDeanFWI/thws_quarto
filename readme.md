@@ -6,6 +6,16 @@ Das System folgt dem **„Single Source"**-Prinzip: Sie schreiben den Inhalt **e
 
 ---
 
+> ### ⚠️ Version 2.0 — wichtige Änderung
+> Die PDF-Vorlagen (`reader`/`handout`/`tutorial`) wurden überarbeitet (THWS-Logo automatisch,
+> horizontal, sprachabhängig; neues Übungsblatt-Layout). **Logos nicht mehr über `logo:` setzen** —
+> der Key ist von Quarto reserviert und funktioniert nicht. Das THWS-Logo erscheint jetzt
+> automatisch; ein eigenes Logo optional über `reader-logo:` / `handout-logo:` / `tutorial-logo:`
+> (siehe Exkurs). Details & Rückfall auf v1: siehe `CHANGELOG.md`
+> (`quarto add c-kraus/thws_quarto@v1.0.0` installiert den alten Stand).
+
+---
+
 ## 🛠️ 1. Vorbereitung (einmalig)
 
 Stellen Sie sicher, dass folgende Software installiert ist:
@@ -60,35 +70,45 @@ course: "Modulname"
 version: "1.0"
 
 # --- Ausgabe-Formate (auskommentieren, was nicht gebraucht wird) ---
+# Logo NICHT angeben — das THWS-Logo wird automatisch eingebunden. lang (oben)
+# schaltet Logo + Beschriftungen (de/en).
 format:
-  # 1. Skript (PDF) – das vollständige Lehrbuch
-  reader-typst:
-    logo: "images/logo.png"   # optional, siehe Exkurs unten
-
-  # 2. Handout (PDF) – kompakt für die Vorlesung
-  handout-typst:
-    logo: "images/logo.png"
-
-  # 3. Übungsblatt (PDF) – Aufgaben mit Lösungen
-  tutorial-typst:
-    logo: "images/logo.png"
-
-  # 4. Moodle (HTML) – interaktiv fürs LMS
-  moodle-html: default
+  reader-typst: default     # 1. Skript (PDF) – das vollständige Lehrbuch
+  handout-typst: default    # 2. Handout (PDF) – kompakt für die Vorlesung
+  tutorial-typst: default   # 3. Übungsblatt (PDF) – siehe eigener Hinweis unten
+  moodle-html: default      # 4. Moodle (HTML) – interaktiv fürs LMS
 ---
 ```
 
-### 🖼️ Exkurs: Eigenes Logo einbinden
+### 🖼️ Exkurs: Logo
 
-1. Erstellen Sie einen Ordner `images` in Ihrem Projekt.
-2. Legen Sie dort Ihre Bilddatei ab (z. B. `logo.png` oder `logo.svg`).
-3. Fügen Sie im YAML-Header unter dem jeweiligen Format die Zeile `logo: "images/logo.png"` hinzu.
+Das **THWS-Logo erscheint automatisch** (horizontal, oben links; bei `lang: en` die englische
+Wortmarke) — Sie müssen nichts tun. Nur für ein **eigenes** Logo:
+
+1. Legen Sie die Datei ab (z. B. `assets/logo.svg`).
+2. Setzen Sie pro Format den **format-eigenen** Key (NICHT `logo:`):
+
+```yaml
+format:
+  reader-typst:
+    reader-logo: "assets/logo.svg"        # + reader-logo-en für die EN-Variante
+  handout-typst:
+    handout-logo: "assets/logo.svg"
+  tutorial-typst:
+    tutorial-logo: "assets/logo.svg"
+```
 
 ---
 
 ## ✨ 4. Interaktive Elemente einbauen
 
 Jedes Element erzeugt im **Web** eine interaktive Komponente und im **PDF** eine passende statische Box.
+
+> **Übungsblatt (`tutorial-typst`):** Dieses Format nutzt seit v2 eine **eigene** Auszeichnung —
+> große Aufgaben als `## …`, Teilaufgaben als `#### …`, Lösungen über Quartos
+> `::: {.content-visible when-meta="show_solutions"}`. Vorlage & Anleitung:
+> `tutorial-07-real-options.qmd` und `docs/tutorial/README.md`. Die folgenden Boxen sind für
+> `reader-typst`, `handout-typst` und `moodle-html` gedacht.
 
 ### A. Lernkarten (Flip-Cards)
 

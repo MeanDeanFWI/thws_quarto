@@ -1,6 +1,12 @@
 /.luarc.json
 .quarto/
+_freeze/
 _quarto_internal_scss_error.scss
+
+# Render-Artefakte (Extension-.typ unter _extensions/ NICHT betroffen — nur Root)
+*.pdf
+/*.typ
+*_files/
 
 # --- MacOS Systemmüll (The Apple Trap) ---
 .DS_Store

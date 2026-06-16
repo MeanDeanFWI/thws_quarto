@@ -1,0 +1,37 @@
+# Changelog
+
+## [2.0.0] — auf `dev` (noch nicht auf `main`)
+
+Überarbeitung der drei PDF-Formate `reader` / `handout` / `tutorial`. **`moodle-html` unverändert.**
+Testen vor dem Release: `quarto add c-kraus/thws_quarto@dev`. Rückfall auf v1:
+`quarto add c-kraus/thws_quarto@v1.0.0`.
+
+### ⚠️ Breaking
+- **Logo nicht mehr über `logo:`.** Der Key ist von Quartos Brand-System reserviert (kam nur als
+  `"true"` an → Build-Fehler). **Migration:** `logo:`-Zeile **entfernen** (das THWS-Logo wird
+  automatisch eingebunden) oder durch den format-eigenen Key ersetzen:
+  `reader-logo:` / `handout-logo:` / `tutorial-logo:` (+ `…-logo-en:` für Englisch).
+
+### reader / handout
+- THWS-Logo **automatisch** aufgelöst (kein Pfad nötig), **horizontal**, per `lang` de/en.
+- Robustes Recolor (weiß auf Cover, orange im Kopf), auch bei SVGs mit eigenem `<style>`.
+- Box-Labels folgen `lang` (z. B. „Fallstudie" / „Case Study").
+- Neue Inline-Boxen `::: {.merksatz}` und `::: {.begriff title="…"}`; `.flip-card`/`.details`
+  farbcodiert. Zitate mit Einzelstrich; kurze Boxen brechen nicht über Seiten.
+- Cover/Datum: Blocksatz-Fix, sprachabhängiges Datum (de `16.06.2026` / en `June 16, 2026`).
+
+### tutorial (Übungsblatt) — neu aufgebaut
+- **Lösungen nativ** über `::: {.content-visible when-meta="show_solutions"}` (`show_solutions`-
+  Schalter) statt Filter — der Filter ist auf Logo-Auto-Resolve eingedampft.
+- **Heading-basiert:** `## Label N: Titel` → Nummern-Badge + Kicker + Seitenumbruch;
+  `#### Task N: Titel` → Teilaufgabe (Label folgt `lang`); optional Punkte `[N P]`.
+  Voraussetzung: erste Zeile `# Titel` (verankert die Level). Siehe `docs/tutorial/README.md`
+  und die Musterdatei `tutorial-07-real-options.qmd`.
+- Masthead nur Modul · Dozent · Ausgabe.
+
+### Aufräumen
+- Totes Root-`_extensions/_extension.yml` (verwies auf nicht existierende Templates) und leeres
+  `_extensions/logo/` entfernt. Entwickler-Docs nach `docs/` ausgelagert (schlanke Auslieferung).
+
+## [1.0.0] — `main` (Tag `v1.0.0`)
+Stabiler Ausgangsstand vor dem Redesign.
