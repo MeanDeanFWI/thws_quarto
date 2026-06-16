@@ -207,7 +207,7 @@
       thws-case-counter.step()
       context { if thws-case-counter.get().first() > 1 { pagebreak(weak: true) } }
       block(above: 1.7em, below: 0.7em, breakable: false, width: 100%)[
-        #grid(columns: (auto, 1fr), column-gutter: 14pt, align: (horizon, horizon),
+        #grid(columns: (auto, 1fr), column-gutter: 14pt, align: (bottom, bottom),
           box(width: 30pt, height: 30pt, fill: thws-orange, radius: 6pt)[
             #align(center + horizon)[#text(fill: white, weight: "bold", size: 16pt)[#num]]
           ],
@@ -237,7 +237,7 @@
       let pts = none
       let pm = rest.match(regex("\\s*\\[\\s*(\\d+)\\s*(?:P|Punkte?|points?|pts)?\\s*\\]\\s*$$"))
       if pm != none { pts = pm.captures.at(0); rest = rest.slice(0, pm.start).trim() }
-      block(above: 1em, below: 0.3em, width: 100%)[
+      block(above: 1em, below: 0.75em, width: 100%)[
         #grid(columns: (1fr, auto), column-gutter: 10pt, align: (left + horizon, right + horizon),
           text(size: 10.5pt, weight: "bold")[
             #text(fill: thws-orange-600)[#label #num] #h(6pt) #text(fill: thws-ink)[#rest]
