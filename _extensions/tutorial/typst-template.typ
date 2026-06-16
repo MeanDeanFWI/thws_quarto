@@ -206,18 +206,22 @@
       // Jede große Aufgabe auf eine neue Seite — außer der ersten.
       thws-case-counter.step()
       context { if thws-case-counter.get().first() > 1 { pagebreak(weak: true) } }
+      // Kästchenhöhe = Höhe von Kicker + Titel (gemessen), damit der Kicker oben
+      // und der Titel unten bündig mit den Kästchen-Kanten abschließen.
       block(above: 1.7em, below: 0.7em, breakable: false, width: 100%)[
-        #grid(columns: (auto, 1fr), column-gutter: 14pt, align: (horizon, horizon),
-          box(width: 30pt, height: 30pt, fill: thws-orange, radius: 6pt)[
-            #align(center + horizon)[#text(fill: white, weight: "bold", size: 16pt)[#num]]
-          ],
-          {
-            text(size: 8.5pt, tracking: 0.18em, weight: "bold", fill: thws-teal)[#upper(label)]
-            linebreak()
-            v(2pt)
-            text(size: 15pt, weight: "bold", fill: thws-ink)[#rest]
-          },
-        )
+        #context {
+          let col = stack(dir: ttb, spacing: 4pt,
+            text(size: 8.5pt, tracking: 0.18em, weight: "bold", fill: thws-teal)[#upper(label)],
+            text(size: 15pt, weight: "bold", fill: thws-ink)[#rest],
+          )
+          let h = measure(col).height
+          grid(columns: (auto, 1fr), column-gutter: 14pt, align: (top, top),
+            box(width: 30pt, height: h, fill: thws-orange, radius: 6pt)[
+              #align(center + horizon)[#text(fill: white, weight: "bold", size: 16pt)[#num]]
+            ],
+            col,
+          )
+        }
       ]
     } else {
       block(above: 1.6em, below: 0.6em)[#text(size: 14.5pt, weight: "bold", fill: thws-teal)[#it.body]]
@@ -237,7 +241,7 @@
       let pts = none
       let pm = rest.match(regex("\\s*\\[\\s*(\\d+)\\s*(?:P|Punkte?|points?|pts)?\\s*\\]\\s*$$"))
       if pm != none { pts = pm.captures.at(0); rest = rest.slice(0, pm.start).trim() }
-      block(above: 1em, below: 0.3em, width: 100%)[
+      block(above: 1.6em, below: 1.0em, width: 100%)[
         #grid(columns: (1fr, auto), column-gutter: 10pt, align: (left + horizon, right + horizon),
           text(size: 10.5pt, weight: "bold")[
             #text(fill: thws-orange-600)[#label #num] #h(6pt) #text(fill: thws-ink)[#rest]

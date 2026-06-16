@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.1] — 2026-06-16
+
+Patch-Release: nur `tutorial`-Layout. `reader`/`handout` unverändert (bleiben funktional 2.0.0).
+
+### tutorial
+- Aufgaben-Headings (`#### Task N`): mehr Abstand davor und danach (war zu beengt).
+- H2-Aufgabenkopf: Nummern-Badge auf Höhe von Kicker + Titel — „CASE STUDY" oben,
+  Titel unten bündig mit den Kästchen-Kanten; Titel sitzt dicht unter dem Kicker.
+
 ## [2.0.0] — 2026-06-16
 
 Überarbeitung der drei PDF-Formate `reader` / `handout` / `tutorial`. **`moodle-html` unverändert.**
