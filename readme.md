@@ -8,11 +8,11 @@ Das System folgt dem **„Single Source"**-Prinzip: Sie schreiben den Inhalt **e
 
 > ### ⚠️ Version 2.0 — wichtige Änderung
 > Die PDF-Vorlagen (`reader`/`handout`/`tutorial`) wurden überarbeitet (THWS-Logo automatisch,
-> horizontal, sprachabhängig; neues Übungsblatt-Layout). **Logos nicht mehr über `logo:` setzen** —
-> der Key ist von Quarto reserviert und funktioniert nicht. Das THWS-Logo erscheint jetzt
-> automatisch; ein eigenes Logo optional über `reader-logo:` / `handout-logo:` / `tutorial-logo:`
-> (siehe Exkurs). Details & Rückfall auf v1: siehe `CHANGELOG.md`
-> (`quarto add c-kraus/thws_quarto@v1.0.0` installiert den alten Stand).
+> horizontal, sprachabhängig; neues Übungsblatt-Layout; Bibliography wieder kompatibel mit
+> Quarto ≥ 1.8). **Logos nicht mehr über `logo:` setzen** — der Key ist von Quarto reserviert und
+> funktioniert nicht. Das THWS-Logo erscheint jetzt automatisch; ein eigenes Logo optional über
+> `reader-logo:` / `handout-logo:` / `tutorial-logo:` (siehe Exkurs). Details & Rückfall auf v1:
+> siehe `CHANGELOG.md` (`quarto add c-kraus/thws_quarto@v1.0.0` installiert den alten Stand).
 
 ---
 

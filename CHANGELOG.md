@@ -1,9 +1,9 @@
 # Changelog
 
-## [2.0.0] — auf `dev` (noch nicht auf `main`)
+## [2.0.0] — 2026-06-16
 
 Überarbeitung der drei PDF-Formate `reader` / `handout` / `tutorial`. **`moodle-html` unverändert.**
-Testen vor dem Release: `quarto add c-kraus/thws_quarto@dev`. Rückfall auf v1:
+Wird per `quarto add c-kraus/thws_quarto` ausgeliefert. Rückfall auf v1:
 `quarto add c-kraus/thws_quarto@v1.0.0`.
 
 ### ⚠️ Breaking
