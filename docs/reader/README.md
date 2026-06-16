@@ -4,8 +4,8 @@ Neugestaltetes `reader`-Format für `c-kraus/thws_quarto`. Editorial-Skript auf 
 THWS Design Sets: **CI-Orange `#EC6500`** als Leitfarbe, **Teal `#005564`** als Akzent,
 Helvetica/Arial für maximale Kompatibilität.
 
-Die optische Vorlage ist `THWS Reader Mockup.html` (4 A4-Seiten). Dieser Ordner enthält die
-daraus abgeleiteten Typst-Dateien.
+Grundlage war ein optischer Mockup (4 A4-Seiten); dieser Ordner enthält die daraus abgeleiteten
+Typst-Dateien.
 
 ## Änderungsprotokoll — Test-Iteration 2026-06-16 (für Claude Design)
 
@@ -76,7 +76,7 @@ oder via `quarto add owner/repo` installiert. `lang` steuert die Auswahl: `lang:
 Wortmarke, sonst die deutsche.
 
 Nur wenn du ein **eigenes** Logo verwenden willst, die Keys **`reader-logo:`** / **`reader-logo-en:`**
-setzen — **nicht** `logo:` (das ist von Quarto reserviert, siehe `LOGO-STOLPERFALLE.md`). Ein
+setzen — **nicht** `logo:` (das ist von Quarto reserviert). Ein
 gesetzter Key hat Vorrang vor dem Auto-Resolve:
 
 ```yaml

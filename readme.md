@@ -106,8 +106,8 @@ Jedes Element erzeugt im **Web** eine interaktive Komponente und im **PDF** eine
 
 > **Übungsblatt (`tutorial-typst`):** Dieses Format nutzt seit v2 eine **eigene** Auszeichnung —
 > große Aufgaben als `## …`, Teilaufgaben als `#### …`, Lösungen über Quartos
-> `::: {.content-visible when-meta="show_solutions"}`. Vorlage & Anleitung:
-> `tutorial-07-real-options.qmd` und `docs/tutorial/README.md`. Die folgenden Boxen sind für
+> `::: {.content-visible when-meta="show_solutions"}`. Anleitung & Beispiele:
+> `docs/tutorial/README.md`. Die folgenden Boxen sind für
 > `reader-typst`, `handout-typst` und `moodle-html` gedacht.
 
 ### A. Lernkarten (Flip-Cards)

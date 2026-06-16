@@ -12,6 +12,12 @@ Testen vor dem Release: `quarto add c-kraus/thws_quarto@dev`. Rückfall auf v1:
   automatisch eingebunden) oder durch den format-eigenen Key ersetzen:
   `reader-logo:` / `handout-logo:` / `tutorial-logo:` (+ `…-logo-en:` für Englisch).
 
+### Fixes
+- **Bibliography unter Quarto ≥ 1.8.** Quarto erzeugt den `#bibliography(...)`-Call jetzt selbst;
+  die Templates taten das zusätzlich → Typst-Fehler „multiple bibliographies are not yet supported".
+  Behoben in allen drei Formaten: `bib_file` wird nicht mehr ans Template übergeben, ein
+  `show bibliography`-Hook fängt Quartos Call ab und stylt ihn (Überschrift, Schrift, Abstände).
+
 ### reader / handout
 - THWS-Logo **automatisch** aufgelöst (kein Pfad nötig), **horizontal**, per `lang` de/en.
 - Robustes Recolor (weiß auf Cover, orange im Kopf), auch bei SVGs mit eigenem `<style>`.
@@ -19,14 +25,14 @@ Testen vor dem Release: `quarto add c-kraus/thws_quarto@dev`. Rückfall auf v1:
 - Neue Inline-Boxen `::: {.merksatz}` und `::: {.begriff title="…"}`; `.flip-card`/`.details`
   farbcodiert. Zitate mit Einzelstrich; kurze Boxen brechen nicht über Seiten.
 - Cover/Datum: Blocksatz-Fix, sprachabhängiges Datum (de `16.06.2026` / en `June 16, 2026`).
+- Inhaltsverzeichnis: H1-Nummerierung in CI-Orange (reader an handout angeglichen).
 
 ### tutorial (Übungsblatt) — neu aufgebaut
 - **Lösungen nativ** über `::: {.content-visible when-meta="show_solutions"}` (`show_solutions`-
   Schalter) statt Filter — der Filter ist auf Logo-Auto-Resolve eingedampft.
 - **Heading-basiert:** `## Label N: Titel` → Nummern-Badge + Kicker + Seitenumbruch;
   `#### Task N: Titel` → Teilaufgabe (Label folgt `lang`); optional Punkte `[N P]`.
-  Voraussetzung: erste Zeile `# Titel` (verankert die Level). Siehe `docs/tutorial/README.md`
-  und die Musterdatei `tutorial-07-real-options.qmd`.
+  Voraussetzung: erste Zeile `# Titel` (verankert die Level). Siehe `docs/tutorial/README.md`.
 - Masthead nur Modul · Dozent · Ausgabe.
 
 ### Aufräumen

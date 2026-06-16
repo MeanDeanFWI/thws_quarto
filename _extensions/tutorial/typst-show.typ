@@ -63,8 +63,7 @@ $if(github_url)$ github_url: "$github_url$", $else$$if(github-url)$ github_url: 
 $if(outline-depth)$ outline_depth: $outline-depth$, $endif$
 $if(show-outline)$ show_outline: $show-outline$, $endif$
 
-// Bibliographie
-$if(bibliography)$ bib_file: "$bibliography$", $endif$
-$if(biblio-style)$ citation_style: "$biblio-style$", $endif$
+// Bibliographie: Quarto (>= 1.8) erzeugt den #bibliography(...)-Call selbst;
+// das Template stylt ihn per `show bibliography`-Hook (kein bib_file mehr nötig).
   doc,
 )

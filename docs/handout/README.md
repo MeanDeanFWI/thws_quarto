@@ -45,5 +45,4 @@ Fixes wurden portiert und mit `03_PPE.qmd` (`--to handout-typst`, EN & DE) gegen
 | Meta-Streifen | Werte-Schrift 11,5→10 pt, Label 7,5→7 pt; Spalten von `1fr` auf **`auto`** → der Dozentenname bricht nicht mehr um. |
 | Datum | Sprachabhängig: DE `16.06.2026`, EN `June 16, 2026`. Quarto liefert ISO unabhängig von `lang`; Datum wird als String durchgereicht (`typst-show.typ`) und im Template per `datetime`+`display` neu formatiert. **Falle:** `typst-template.typ` ist ein Pandoc-Template — das `$` im Regex-Endanker muss als `$$` geschrieben werden. |
 
-Logo-Verdrahtung im Detail siehe `../reader/LOGO-STOLPERFALLE.md` (identisch, nur Key-Präfix
-`handout-` statt `reader-`).
+Logo-Verdrahtung identisch zum `reader` (nur Key-Präfix `handout-` statt `reader-`).

@@ -284,6 +284,17 @@
   set par(leading: 0.7em, spacing: 1.05em, justify: true, first-line-indent: 0pt)
 
   show cite: set text(fill: thws-orange)
+  // Bibliography: Quarto (>= 1.8) erzeugt den #bibliography(...)-Call selbst.
+  // Wir rufen ihn NICHT mehr im Template auf, sondern fangen Quartos Call ab
+  // und stylen ihn (Überschrift + Schrift + Abstände). Eigener Titel statt Default.
+  set bibliography(title: none)
+  show bibliography: it => {
+    pagebreak()
+    set par(spacing: 8pt, leading: 0.62em)
+    set text(size: 9.5pt)
+    heading(level: 1, numbering: none)[#if lang == "de" { "Literatur" } else { "Literature" }]
+    it
+  }
   set footnote(numbering: n => text(fill: thws-orange, numbering("1", n)))
   set list(indent: 1em, marker: (text(fill: thws-orange)[•], text(fill: thws-orange)[‣], text(fill: thws-orange)[–]))
   set enum(indent: 1em, numbering: (..nums) => text(fill: thws-orange, numbering("1.", ..nums)))
@@ -451,9 +462,14 @@
   if show_outline {
     let outline_title = if lang == "de" { "Inhalt" } else { "Contents" }
     heading(level: 1, numbering: none, outlined: false)[#outline_title]
+    // H1-Eintrag: Nummer orange, Titel/Seite Tinte-fett.
     show outline.entry.where(level: 1): it => {
       v(10pt, weak: true)
-      text(weight: "bold", fill: thws-ink, size: 12pt, it)
+      set text(weight: "bold", fill: thws-ink, size: 12pt)
+      it.indented(
+        text(fill: thws-orange, it.prefix()),
+        it.inner(),
+      )
     }
     set outline(indent: 1.4em)
     outline(title: none, depth: outline_depth)
@@ -465,18 +481,6 @@
   // =========================================================================
   body
 
-  // =========================================================================
-  // LITERATUR
-  // =========================================================================
-  if bib_file != none [
-    #pagebreak()
-    #set par(spacing: 8pt, leading: 0.62em)
-    #set text(size: 9.5pt)
-    #heading(level: 1, numbering: none)[#if lang == "de" { "Literatur" } else { "Literature" }]
-    #if citation_style != none {
-      bibliography(bib_file, style: citation_style, title: none)
-    } else {
-      bibliography(bib_file, title: none)
-    }
-  ]
+  // Literatur: wird von Quartos #bibliography(...)-Call erzeugt und vom
+  // `show bibliography`-Hook oben gestylt (eigene Überschrift, Schrift, Abstände).
 }

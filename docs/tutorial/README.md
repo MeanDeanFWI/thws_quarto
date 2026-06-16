@@ -17,10 +17,9 @@ _extensions/tutorial/
 └── thws-logo_en.svg        (englische Wortmarke, horizontal)
 ```
 
-## Autoren-Format (Musterdatei)
+## Autoren-Format
 
-Referenz-Exemplar: **`tutorial-07-real-options.qmd`** — zeigt alle Elemente und dient als
-Grundlage für einen Erstellungs-Skill.
+Das folgende Schema zeigt alle Elemente des Übungsblatt-Formats.
 
 **YAML-Kopf** (alles außer `title` optional, alles erscheint im Masthead):
 
@@ -98,8 +97,7 @@ formatiert (DE `16.06.2026`, EN `June 16, 2026`).
 
 ## Änderungsprotokoll — angeglichen an `reader` (2026-06-16)
 
-Getestet mit `tutorial-07-real-options.qmd` (`--to tutorial-typst`, `show_solutions` true/false,
-EN & DE).
+Getestet an einer Muster-`.qmd` (`--to tutorial-typst`, `show_solutions` true/false, EN & DE).
 
 | Bereich | Änderung |
 |---|---|
@@ -110,8 +108,7 @@ EN & DE).
 | `typst-template.typ` (Nummerierung, wie Mockup) | **H2** = große Aufgaben → dickes oranges **Nummern-Badge** + Kicker + Titel; Nummer *und* Kicker werden aus der Überschrift geparst (`"Case Study 1: …"` → Badge `1`, Kicker `CASE STUDY`) — bezeichnungs-/sprachagnostisch, respektiert die manuelle Zählung (pro Aufgabe zurückgesetzt). **H3** = Überleitung (Context/Tasks). **H4** = kleine Tasks → `Task N` orange + Titel, ohne Badge. Helfer `to-string` zieht den Klartext aus dem Heading. Passt eine Überschrift nicht ins „Wort N:"-Schema → schlichte Standard-Überschrift. |
 | `typst-template.typ` (entfernt) | Die toten Funktionen `#eyebrow`, `#aufgabe`, `#loesung`, `#flashcard` und der Aufgaben-Counter — nach dem Filter-Schlankheitskur nicht mehr aufgerufen. |
 
-Logo-Verdrahtung im Detail siehe `../reader/LOGO-STOLPERFALLE.md` (identisch, Key-Präfix
-`tutorial-`).
+Logo-Verdrahtung identisch zum `reader` (nur Key-Präfix `tutorial-`).
 
 ## Umgebung
 

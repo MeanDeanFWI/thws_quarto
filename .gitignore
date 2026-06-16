@@ -20,3 +20,9 @@ _quarto_internal_scss_error.scss
 
 # Excalidraw
 excalidraw.log
+
+# --- Interne Arbeits-/Entwurfsdateien (nicht Teil der offiziellen Doku) ---
+/tutorial-07-real-options.qmd
+/tutorial-skill-prompt.md
+docs/reader/LOGO-STOLPERFALLE.md
+*Mockup.html

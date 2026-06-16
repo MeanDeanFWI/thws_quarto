@@ -225,6 +225,16 @@
   set par(leading: 0.7em, spacing: 1.05em, justify: true, first-line-indent: 0pt)
 
   show cite: set text(fill: thws-orange)
+  // Bibliography: Quarto (>= 1.8) erzeugt den #bibliography(...)-Call selbst.
+  // Nicht mehr im Template aufrufen, sondern Quartos Call abfangen und stylen.
+  set bibliography(title: none)
+  show bibliography: it => {
+    v(1.6em)
+    set par(leading: 0.62em, spacing: 8pt)
+    heading(level: 1, numbering: none)[#if lang == "de" { "Literatur" } else { "Literature" }]
+    set text(size: 9pt)
+    it
+  }
   set footnote(numbering: n => text(fill: thws-orange, numbering("1", n)))
   set list(indent: 1em, marker: (text(fill: thws-orange)[•], text(fill: thws-orange)[‣], text(fill: thws-orange)[–]))
   set enum(indent: 1em, numbering: (..nums) => text(fill: thws-orange, numbering("1.", ..nums)))
@@ -369,14 +379,6 @@
   set par(justify: true)
   body
 
-  // -------------------------------------------------------------------------
-  // LITERATUR
-  // -------------------------------------------------------------------------
-  if bib_file != none [
-    #v(1.4em)
-    #line(length: 100%, stroke: 0.5pt + thws-line)
-    #set text(size: 9pt)
-    #set par(leading: 0.62em, spacing: 8pt)
-    #if citation_style != none { bibliography(bib_file, style: citation_style) } else { bibliography(bib_file) }
-  ]
+  // Literatur: erzeugt von Quartos #bibliography(...)-Call, gestylt vom
+  // `show bibliography`-Hook oben (Überschrift, Schrift, Abstände).
 }

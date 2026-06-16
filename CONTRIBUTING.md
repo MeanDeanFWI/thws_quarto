@@ -11,11 +11,11 @@ Branch `main`). Damit Konsumenten nicht vorzeitig brechen, läuft die Weiterentw
 ## Ablauf
 1. Auf `dev` arbeiten: `git checkout dev`.
 2. Extension(s) unter `_extensions/<name>/` ändern.
-3. **Lokal rendern** (Smoke-Test):
+3. **Lokal rendern** (Smoke-Test) mit einer eigenen Test-`.qmd`:
    ```bash
-   quarto render tutorial-07-real-options.qmd --to tutorial-typst                        # Übungsblatt (Angabe)
-   quarto render tutorial-07-real-options.qmd --to tutorial-typst -M show_solutions:true # mit Lösungen
-   # reader/handout mit einer eigenen Test-.qmd (lang de/en gegenprüfen)
+   quarto render test.qmd --to tutorial-typst                        # Übungsblatt (Angabe)
+   quarto render test.qmd --to tutorial-typst -M show_solutions:true # mit Lösungen
+   # reader/handout ebenso gegenprüfen (lang de/en)
    ```
 4. `CHANGELOG.md` pflegen, committen, `git push` (dev).
 5. **Release:** `dev` → `main` mergen, `vX.Y.Z` taggen, pushen:
@@ -27,6 +27,7 @@ Branch `main`). Damit Konsumenten nicht vorzeitig brechen, läuft die Weiterentw
 - `_extensions/{reader,handout,tutorial}/` — die drei PDF-Formate (Typst). **Nur Funktionsdateien**
   (`_extension.yml`, `*.typ`, `filter.lua`, Logos) — wird per `quarto add` ausgeliefert.
 - `_extensions/moodle/` — HTML/Moodle-Format (separat, bei Bedarf später überarbeiten).
-- `docs/<name>/` — Entwickler-Doku (Changelogs, Logo-Verdrahtung, Mockups). **Nicht** ausgeliefert.
-- `tutorial-07-real-options.qmd` — Musterdatei / Referenz fürs Übungsblatt-Format.
-- `tutorial-skill-prompt.md` — Prompt für einen Übungsblatt-Erstellungs-Skill.
+- `docs/<name>/` — Entwickler-Doku (`README.md` je Format). **Nicht** ausgeliefert.
+
+> Lokale Arbeitsdateien (gitignored, nicht im Repo): Mockup-HTMLs, `docs/reader/LOGO-STOLPERFALLE.md`,
+> Musterdatei `tutorial-07-real-options.qmd`, `tutorial-skill-prompt.md`.
