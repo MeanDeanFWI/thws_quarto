@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.1] — auf `dev` (noch nicht auf `main`)
+
+Testbar mit `quarto add c-kraus/thws_quarto@dev`.
+
+### tutorial
+- Aufgaben-Headings (`#### Task N`) mit mehr Abstand zum Folgetext (war zu beengt).
+- H2-Aufgabenkopf: Nummern-Badge bündig zur Unterkante des Titels (statt mittig zentriert).
+
 ## [2.0.0] — 2026-06-16
 
 Überarbeitung der drei PDF-Formate `reader` / `handout` / `tutorial`. **`moodle-html` unverändert.**
