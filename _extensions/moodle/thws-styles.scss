@@ -49,6 +49,7 @@ $_light-grey: #e7e7e7;
   transition: all 0.2s ease-in-out;
 }
 
+#custom-header img,
 #custom-header svg {
   height: 4em;
   width: auto;
@@ -61,6 +62,7 @@ $_light-grey: #e7e7e7;
   padding: 0.2em;
 }
 
+#custom-header.shrink img,
 #custom-header.shrink svg {
   transform: scale(0.8);
   margin-top: -0.5em;
@@ -79,6 +81,7 @@ body {
 }
 
 @media screen and (max-width: 600px) {
+  #custom-header img,
   #custom-header svg {
     height: 3em;
     width: auto;
