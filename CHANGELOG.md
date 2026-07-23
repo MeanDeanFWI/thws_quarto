@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [2.0.2] — 2026-07-23
+
+Patch-Release: Windows-Fix für die drei PDF-Formate `reader` / `handout` / `tutorial`.
+`moodle-html` unverändert (bleibt 1.0.0).
+
 ### Fixes
 - **PDF-Rendern unter Windows repariert** (`reader` / `handout` / `tutorial`). Die automatische
   Logo-Pfad-Auflösung nutzte `pandoc.path.make_relative`, das unter Windows Backslash-Separatoren
