@@ -1,5 +1,20 @@
 # Changelog
 
+## [Unreleased]
+
+## [2.0.2] — 2026-07-23
+
+Patch-Release: Windows-Fix für die drei PDF-Formate `reader` / `handout` / `tutorial`.
+`moodle-html` unverändert (bleibt 1.0.0).
+
+### Fixes
+- **PDF-Rendern unter Windows repariert** (`reader` / `handout` / `tutorial`). Die automatische
+  Logo-Pfad-Auflösung nutzte `pandoc.path.make_relative`, das unter Windows Backslash-Separatoren
+  liefert. Zusammen mit dem `.replace("\\","")` in `typst-show.typ` wurden die Separatoren
+  verschluckt (`_extensions\c-kraus\reader\thws-logo.svg` → `_extensionsc-krausreaderthws-logo.svg`),
+  wodurch Typst die Logo-SVG nicht fand und der Build abbrach. Fix: Separatoren in `logo_rel()` auf
+  Forward Slashes normalisieren (`p:gsub("\\", "/")`) — plattformunabhängig, macOS/Linux unberührt.
+
 ## [2.0.1] — 2026-06-16
 
 Patch-Release: nur `tutorial`-Layout. `reader`/`handout` unverändert (bleiben funktional 2.0.0).
