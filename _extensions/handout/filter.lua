@@ -24,7 +24,11 @@ function Meta(m)
     if quarto.doc.is_format("typst") then
         local doc_dir = pandoc.path.directory(quarto.doc.input_file or ".")
         local function logo_rel(name)
-            return pandoc.path.make_relative(quarto.utils.resolvePath(name), doc_dir)
+            local p = pandoc.path.make_relative(quarto.utils.resolvePath(name), doc_dir)
+            -- Windows: make_relative liefert Backslash-Separatoren; Typst
+            -- read() und das .replace("\\","") in typst-show.typ wuerden die
+            -- Separatoren sonst schlucken. Forward Slashes gehen plattformweit.
+            return (p:gsub("\\", "/"))
         end
         if not m['handout-logo'] then
             m['handout-logo'] = pandoc.MetaString(logo_rel("thws-logo.svg"))
