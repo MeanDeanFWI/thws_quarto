@@ -87,6 +87,39 @@ format:
     reader-logo-en: "assets/mein-logo_en.svg"   # optional
 ```
 
+## Dokumentart / Beschriftungen umbenennen
+
+Das Format ist auf Vorlesungsskripte zugeschnitten — Deckblatt-Kicker „VORLESUNGSSKRIPT",
+Gliederungsebene „KAPITEL", Meta-Spalten „Modul / Semester / Version". Für andere Dokumentarten
+(Positions- und Diskussionspapiere, Konzepte, Handreichungen) lassen sich diese Wörter per YAML
+überschreiben; ohne Key bleibt alles wie bisher (sprachabhängig de/en):
+
+```yaml
+format:
+  reader-typst:
+    reader-kicker:         "Diskussionspapier"   # statt "Vorlesungsskript" / "Lecture Notes"
+    reader-section-label:  "Abschnitt"           # statt "Kapitel" / "Chapter" (H1-Opener)
+    reader-course-label:   "Dokument"            # statt "Modul" / "Module" (Deckblatt-Meta)
+    reader-semester-label: "Stand"               # statt "Semester" (Deckblatt-Meta)
+    reader-qr-caption:     "Online-Fassung"      # statt "Interaktive Übungen & Online-Version"
+```
+
+Passend dazu lässt sich die Beschriftung einer Box (und ihr Titel) direkt am Div überschreiben —
+so bleiben die Box-Looks nutzbar, ohne dass „Deep Dive" oder „Fallstudie" darüber steht:
+
+```markdown
+::: {.details label="Kommentar"}
+#### Warum so formuliert
+
+Begründung …
+:::
+```
+
+> Hinweis: `.details` und `.flip-card` tragen ihre Optik nur im Typst-Pfad — die Extension liefert
+> ausschließlich das Typst-Format. In einer parallelen `html:`-Ausgabe bleiben die Divs ungestylt
+> (Quarto macht daraus eine `<section class="… details" data-label="…">`); dort ggf. per
+> `include-in-header` ein paar CSS-Zeilen ergänzen.
+
 ## Was neu ist
 
 - **Deckblatt** — vollflächig Teal, weiße Wortmarke, oranger Eck-Akzent, großer Editorial-Titel,

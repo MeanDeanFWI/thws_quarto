@@ -2,6 +2,19 @@
 
 ## [Unreleased]
 
+### reader
+- **Lehr-Vokabular überschreibbar.** Deckblatt-Kicker, Bezeichnung der obersten Gliederungsebene,
+  die beiden Meta-Spalten des Deckblatts und die QR-Bildunterschrift waren hartcodiert
+  („Vorlesungsskript", „Kapitel", „Modul", „Semester", „Interaktive Übungen & Online-Version").
+  Neue optionale Keys: `reader-kicker`, `reader-section-label`, `reader-course-label`,
+  `reader-semester-label`, `reader-qr-caption`. Ohne Key unverändertes Verhalten — damit taugt
+  `reader-typst` auch für Papiere außerhalb der Lehre (Gremien-, Konzept-, Diskussionspapiere).
+- **Box-Label per Attribut.** `::: {.details label="Kommentar"}` (bzw. `title="…"`) überschreibt
+  die Standardbeschriftung einer Box, so dass die Box-Looks ohne „Deep Dive"/„Fallstudie"
+  nutzbar sind.
+- **Fix:** Der Kicker der obersten Gliederungsebene stand auch bei `lang: en` auf Deutsch
+  („KAPITEL"); er folgt jetzt der Dokumentsprache („CHAPTER").
+
 ## [2.0.2] — 2026-07-23
 
 Patch-Release: Windows-Fix für die drei PDF-Formate `reader` / `handout` / `tutorial`.

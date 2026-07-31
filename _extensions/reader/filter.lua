@@ -243,6 +243,14 @@ function Div(el)
             typst_content:extend(el.content)
         end
 
+        -- Box-Beschriftung/-Titel per Attribut überschreibbar, damit dieselben
+        -- Box-Looks auch außerhalb der Lehre nutzbar sind:
+        --   ::: {.details label="Kommentar" title="Warum so formuliert"}
+        if el.attributes then
+            if el.attributes.label then box_label = el.attributes.label end
+            if el.attributes.title then box_title = el.attributes.title end
+        end
+
         if kind ~= nil then
             local result = pandoc.Blocks({})
             local args = '#flashcard(kind: "' .. kind .. '"'
