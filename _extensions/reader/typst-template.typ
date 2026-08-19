@@ -316,7 +316,7 @@
     heading(level: 1, numbering: none)[#if lang == "de" { "Literatur" } else { "Literature" }]
     it
   }
-  set footnote(numbering: n => text(fill: thws-orange, numbering("1", n)))
+  set footnote(numbering: n => text(size: 1.9em, fill: thws-orange, numbering("1", n)))
   set list(indent: 1em, marker: (text(fill: thws-orange)[•], text(fill: thws-orange)[‣], text(fill: thws-orange)[–]))
   set enum(indent: 1em, numbering: (..nums) => text(fill: thws-orange, numbering("1.", ..nums)))
 

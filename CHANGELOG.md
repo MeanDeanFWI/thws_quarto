@@ -2,6 +2,18 @@
 
 ## [Unreleased]
 
+### reader / handout / tutorial
+- **Fußnoten-Ziffern lesbar vergrößert.** In der Hausschrift (Helvetica) waren die
+  Fußnoten-Hochzahlen so klein, dass sie wie fehlende Nummern wirkten. Marker jetzt auf
+  `1.9em` (orange, im Text und in der Fußnotenliste gut lesbar).
+
+### Doku
+- **Zitate/Literatur (Zotero) dokumentiert.** Für **Fußnoten-Zitierstile** (juristische/Note-CSL)
+  verarbeitet das PDF Zitate sonst nativ über Typst → unnummerierte Fußnoten und fehlende
+  Verzeichnis-Einträge. Workaround in der README: `citeproc: true` + `reference-section-title`
+  erzwingt Pandoc-Zitate (wie im HTML). Außerdem der `faculty:`-Key (Fakultät oben rechts)
+  dokumentiert.
+
 ### reader
 - **Lehr-Vokabular überschreibbar.** Deckblatt-Kicker, Bezeichnung der obersten Gliederungsebene,
   die beiden Meta-Spalten des Deckblatts und die QR-Bildunterschrift waren hartcodiert
