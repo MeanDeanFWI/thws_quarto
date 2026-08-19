@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased]
+## [2.0.3] — 2026-08-19
+
+Patch-Release der drei PDF-Formate (`reader` / `handout` / `tutorial`). `moodle-html` unverändert.
 
 ### reader / handout / tutorial
 - **Fußnoten-Ziffern lesbar vergrößert.** In der Hausschrift (Helvetica) waren die
