@@ -205,6 +205,19 @@
   outline_depth: 2,
   web_url: none,
   github_url: none,
+  // Dokumentart (Deckblatt-Kicker) und Bezeichnung der obersten Gliederungs-
+  // ebene (H1-Opener). Default bleibt das Vorlesungsskript; für andere
+  // Dokumentarten (Papiere, Vorlagen, Konzepte) per YAML überschreibbar:
+  //   reader-kicker: "Diskussionspapier"
+  //   reader-section-label: "Abschnitt"
+  kicker: none,
+  section_label: none,
+  qr_caption: none,
+  // Beschriftung der Deckblatt-Metazeile (Default "Modul" / "Semester"):
+  //   reader-course-label: "Dokument"
+  //   reader-semester-label: "Stand"
+  course_label: none,
+  semester_label: none,
   body,
 ) = {
   let author_list = if type(authors) == array { authors } else if type(authors) == dictionary { (authors,) } else { () }
@@ -236,6 +249,14 @@
   } else { none }
 
   let course-disp = if course != none { course } else { title }
+
+  // Dokumentart / Gliederungsbezeichnung / QR-Bildunterschrift: gesetzter Key
+  // gewinnt, sonst die sprachabhängigen Skript-Defaults (abwärtskompatibel).
+  let kicker-disp = if kicker != none { kicker } else if lang-de { [Vorlesungsskript] } else { [Lecture Notes] }
+  let section-disp = if section_label != none { section_label } else if lang-de { [Kapitel] } else { [Chapter] }
+  let qr-caption-disp = if qr_caption != none { qr_caption } else if lang-de { [Interaktive Übungen \ & Online-Version] } else { [Interactive exercises \ & online version] }
+  let course-label-disp = if course_label != none { course_label } else if lang-de { [Modul] } else { [Module] }
+  let semester-label-disp = if semester_label != none { semester_label } else { [Semester] }
 
   // -------------------------------------------------------------------------
   // Globale Seite (Inhaltsseiten ab S. 2): Kopf links Logo (orange), rechts
@@ -295,7 +316,7 @@
     heading(level: 1, numbering: none)[#if lang == "de" { "Literatur" } else { "Literature" }]
     it
   }
-  set footnote(numbering: n => text(fill: thws-orange, numbering("1", n)))
+  set footnote(numbering: n => text(size: 1.9em, fill: thws-orange, numbering("1", n)))
   set list(indent: 1em, marker: (text(fill: thws-orange)[•], text(fill: thws-orange)[‣], text(fill: thws-orange)[–]))
   set enum(indent: 1em, numbering: (..nums) => text(fill: thws-orange, numbering("1.", ..nums)))
 
@@ -320,7 +341,7 @@
         spacing: 0pt,
         text(size: 56pt, weight: "bold", fill: thws-orange, top-edge: "cap-height", bottom-edge: "baseline")[#numbering("01", n)],
         v(7pt),
-        eyebrow("Kapitel", thws-teal),
+        eyebrow(section-disp, thws-teal),
         v(10pt),
         text(size: 23pt, weight: "bold", fill: thws-ink)[#it.body],
         v(9pt),
@@ -398,7 +419,7 @@
     // Mitte: Eyebrow + Titel + Untertitel + Meta
     #place(horizon + left, dx: 16mm, dy: -6mm, block(width: 150mm)[
       #grid(columns: (auto, 1fr), column-gutter: 12pt, align: horizon,
-        text(size: 9pt, weight: "bold", tracking: 0.3em, fill: thws-orange)[#upper(if lang == "de" { "Vorlesungsskript" } else { "Lecture Notes" })],
+        text(size: 9pt, weight: "bold", tracking: 0.3em, fill: thws-orange)[#upper(kicker-disp)],
         line(length: 100%, stroke: 1.5pt + rgb(255, 255, 255, 46)),
       )
       #v(14pt)
@@ -410,8 +431,8 @@
       #v(26pt)
       #grid(columns: (auto, auto, auto), column-gutter: 34pt,
         ..(
-          (if course != none { ("Modul", course) }),
-          (if semester != none { ("Semester", semester) }),
+          (if course != none { (course-label-disp, course) }),
+          (if semester != none { (semester-label-disp, semester) }),
           (if version != none { ("Version", version) }),
         ).filter(x => x != none).map(p => {
           stack(spacing: 6pt,
@@ -442,7 +463,7 @@
           if qr_target != none {
             align(center, stack(spacing: 6pt,
               box(fill: white, inset: 5pt, radius: 4pt)[#qr-code(qr_target, width: 24mm)],
-              text(size: 7pt, fill: rgb(255, 255, 255, 190))[Interaktive Übungen \ & Online-Version],
+              text(size: 7pt, fill: rgb(255, 255, 255, 190))[#qr-caption-disp],
             ))
           }
         },

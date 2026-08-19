@@ -68,6 +68,8 @@ author:
 semester: "WS 25/26"
 course: "Modulname"
 version: "1.0"
+faculty: "Fakultät Wirtschaftsingenieurwesen"   # erscheint oben rechts im PDF;
+                                                # ohne Angabe greift der FWI-Default
 
 # --- Ausgabe-Formate (auskommentieren, was nicht gebraucht wird) ---
 # Logo NICHT angeben — das THWS-Logo wird automatisch eingebunden. lang (oben)
@@ -97,6 +99,29 @@ format:
   tutorial-typst:
     tutorial-logo: "assets/logo.svg"
 ```
+
+### 📚 Exkurs: Zitate & Literatur (Zotero / CSL)
+
+Für einfache **Autor-Jahr-Stile** funktioniert die Standard-Einbindung (`bibliography:` + `csl:`)
+im PDF wie im HTML — nichts weiter nötig.
+
+**⚠️ Bei Fußnoten-Zitierstilen** (juristische / „Note"-CSL, z. B. viele deutsche Rechts-Stile aus
+Zotero) gilt: Das PDF verarbeitet Zitate standardmäßig **nativ über Typst**, und dessen Zitat-Engine
+kommt mit Note-Styles nicht vollständig zurecht — Folge: **Fußnoten ohne Nummern**, verstümmelte
+Felder und **fehlende Einträge** im Literaturverzeichnis (im HTML ist alles korrekt, weil dort
+Pandoc-`citeproc` läuft).
+
+**Lösung:** Erzwingen Sie auch fürs PDF `citeproc` — dann ist das PDF identisch zum HTML:
+
+```yaml
+bibliography: literatur.bib
+csl: juristische-zitierweise.csl
+citeproc: true                       # zwingt Pandoc-Zitate (wie im HTML) → Fußnoten
+                                     # werden nummeriert, alle Einträge erscheinen
+reference-section-title: "Literatur" # Überschrift über dem Verzeichnis
+```
+
+Das stört HTML/Moodle nicht (die nutzen ohnehin `citeproc`).
 
 ---
 

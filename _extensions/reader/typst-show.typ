@@ -51,6 +51,14 @@ $if(faculty)$ faculty: [$faculty$], $endif$
 $if(university)$ university: [$university$], $endif$
 $if(version)$ version: [$version$], $endif$
 
+// Dokumentart statt "Vorlesungsskript" (Deckblatt-Kicker), Bezeichnung der
+// obersten Gliederungsebene statt "Kapitel", QR-Bildunterschrift.
+$if(reader-kicker)$ kicker: [$reader-kicker$], $endif$
+$if(reader-section-label)$ section_label: [$reader-section-label$], $endif$
+$if(reader-qr-caption)$ qr_caption: [$reader-qr-caption$], $endif$
+$if(reader-course-label)$ course_label: [$reader-course-label$], $endif$
+$if(reader-semester-label)$ semester_label: [$reader-semester-label$], $endif$
+
 // QR-Code-URLs — 'web_url' wird vom filter.lua automatisch befüllt
 $if(web_url)$ web_url: "$web_url$", $else$$if(web-url)$ web_url: "$web-url$", $endif$$endif$
 $if(github_url)$ github_url: "$github_url$", $else$$if(github-url)$ github_url: "$github-url$", $endif$$endif$
